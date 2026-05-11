@@ -1,3 +1,5 @@
+"use client";
+
 import DashboardSidebar from "./DashboardSidebar";
 
 export default function DashboardLayout({ children, role = "buyer" }) {
