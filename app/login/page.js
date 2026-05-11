@@ -9,11 +9,8 @@ export default function Page() {
     <>
       <style dangerouslySetInnerHTML={{ __html: css }} />
       <div className="susync-root">
-        {/* Wrap AuthLoginClient in Suspense. 
-          This prevents the "useSearchParams() should be wrapped in a suspense boundary" error
-          during the Vercel production build.
-        */}
-        <Suspense fallback={<div className="loading-state">Loading login...</div>}>
+        {/* This Suspense component is the key to fixing the build error */}
+        <Suspense fallback={<div>Loading...</div>}>
           <AuthLoginClient />
         </Suspense>
       </div>
