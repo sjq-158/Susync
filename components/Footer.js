@@ -15,6 +15,7 @@ export default function Footer() {
           </p>
         </div>
 
+        {/* Product Section */}
         <div className="footer-col">
           <h4 className="footer-heading">PRODUCT</h4>
           <Link href="/buyer/properties" className="footer-link">
@@ -28,6 +29,7 @@ export default function Footer() {
           </Link>
         </div>
 
+        {/* Company Section */}
         <div className="footer-col">
           <h4 className="footer-heading">COMPANY</h4>
           <Link href="/about" className="footer-link">
@@ -41,6 +43,7 @@ export default function Footer() {
           </Link>
         </div>
 
+        {/* Support Section */}
         <div className="footer-col">
           <h4 className="footer-heading">SUPPORT</h4>
           <Link href="/help" className="footer-link">
