@@ -21,7 +21,7 @@
             font-family: 'Poppins', sans-serif; 
             background-color: var(--neutral-100); 
             color: var(--neutral-900); 
-            width: 1440px; 
+            width: 100%; max-width: 1440px; 
             margin: 0 auto; 
             min-height: 100vh;
             overflow-x: hidden;
@@ -30,7 +30,7 @@
         /* --- Navbar --- */
         nav {
             height: 72px;
-            padding: 0 80px;
+            padding: 0 20px;
             background: var(--white);
             display: flex;
             align-items: center;
@@ -59,7 +59,7 @@
 
         /* --- Layout Container --- */
         .figma-container {
-            width: 1440px;
+            width: 100%; max-width: 1440px;
             margin: 0 auto;
             background: var(--white);
             position: relative;
@@ -116,7 +116,7 @@
 
         /* --- Footer --- */
         footer {
-            background: var(--neutral-900); padding: 80px 80px 40px; color: white;
+            background: var(--neutral-900); padding: 40px 20px 40px; color: white;
         }
         .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 60px; margin-bottom: 60px; }
         .f-col h4 { font-size: 13px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 24px; color: white; }

@@ -17,12 +17,12 @@
         .susync-root { font-family: 'Poppins', sans-serif; background-color: var(--white); color: var(--neutral-900); overflow-x: hidden; }
 
         /* Figma Strict Width */
-        .figma-container { width: 1440px; margin: 0 auto; background: white; position: relative; }
+        .figma-container { width: 100%; max-width: 1440px; margin: 0 auto; background: white; position: relative; }
 
         /* --- NAVBAR --- */
         nav {
             height: 72px;
-            padding: 0 80px;
+            padding: 0 20px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -93,7 +93,7 @@
         /* Empty State for Roles */
         .empty-state {
             text-align: center;
-            padding: 80px 40px;
+            padding: 40px 20px;
             background: var(--neutral-100);
             border-radius: 24px;
             border: 2px dashed var(--border);
@@ -107,7 +107,7 @@
         .benefit-item p { font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.5; }
 
         /* --- FOOTER --- */
-        footer { background: var(--neutral-900); padding: 80px 80px 40px; color: white; }
+        footer { background: var(--neutral-900); padding: 40px 20px 40px; color: white; }
         .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 60px; margin-bottom: 40px; }
         .f-col h4 { font-size: 13px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 24px; color: white; }
         .f-col a { display: block; color: var(--neutral-500); text-decoration: none; font-size: 14px; margin-bottom: 12px; }

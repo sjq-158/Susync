@@ -19,7 +19,7 @@
             font-family: 'Poppins', sans-serif; 
             background-color: var(--white); 
             color: var(--neutral-900); 
-            width: 1440px; 
+            width: 100%; max-width: 1440px; 
             margin: 0 auto; 
             height: 100vh;
             display: flex;

@@ -19,7 +19,7 @@
             font-family: 'Poppins', sans-serif; 
             background-color: var(--neutral-100); 
             color: var(--neutral-900); 
-            width: 1440px; 
+            width: 100%; max-width: 1440px; 
             margin: 0 auto; 
             min-height: 100vh;
             overflow-x: hidden;
@@ -65,7 +65,7 @@
 
         .help-hero {
             background: var(--primary-500);
-            padding: 80px 40px;
+            padding: 40px 20px;
             text-align: center;
             color: white;
         }
@@ -194,7 +194,7 @@
         .btn-contact:hover { opacity: 0.9; }
 
         footer {
-            background: var(--neutral-900); padding: 80px 80px 40px; color: white;
+            background: var(--neutral-900); padding: 40px 20px 40px; color: white;
         }
         .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 60px; margin-bottom: 60px; }
         .f-col h4 { font-size: 13px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 24px; color: white; }

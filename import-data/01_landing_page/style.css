@@ -16,12 +16,12 @@
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
         .susync-root { font-family: 'Poppins', sans-serif; background-color: var(--white); color: var(--neutral-900); overflow-x: hidden; }
 
-        .figma-container { width: 1440px; margin: 0 auto; background: white; position: relative; }
+        .figma-container { width: 100%; max-width: 100%; max-width: 1440px; margin: 0 auto; background: white; position: relative; }
 
         /* --- NAVBAR --- */
         nav {
             height: 72px;
-            padding: 0 80px;
+            padding: 0 20px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -43,15 +43,16 @@
         /* --- HERO --- */
         .hero {
             background-color: var(--primary-100);
-            padding: 80px 80px;
+            padding: 40px 20px;
             display: flex;
+            flex-direction: column;
             align-items: center;
             gap: 60px;
         }
 
         .hero-content { flex: 1; }
         .hero-tagline { color: var(--accent-500); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 16px; display: block; }
-        .hero-title { font-size: 52px; font-weight: 800; line-height: 1.1; margin-bottom: 24px; }
+        .hero-title { font-size: 32px; font-weight: 800; line-height: 1.1; margin-bottom: 24px; }
         .hero-title span { color: var(--primary-500); }
         .hero-desc { font-size: 18px; color: var(--neutral-500); max-width: 520px; margin-bottom: 32px; line-height: 1.6; }
 
@@ -113,7 +114,7 @@
         .anim-loc { font-size: 12px; opacity: 0.8; }
 
         /* --- WHY CHOOSE US --- */
-        .why-us { padding: 80px 80px; background: var(--white); text-align: center; }
+        .why-us { padding: 40px 20px; background: var(--white); text-align: center; }
         .why-label { color: var(--accent-500); font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; }
         .why-title { font-size: 38px; font-weight: 800; margin: 10px 0 50px; color: #111827; }
         
@@ -130,3 +131,9 @@
         .f-col h4 { font-size: 13px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 24px; color: white; }
         .f-col a { display: block; color: var(--neutral-500); text-decoration: none; font-size: 14px; margin-bottom: 12px; }
         .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 32px; display: flex; justify-content: space-between; font-size: 11px; color: var(--neutral-500); }
+
+        @media (min-width: 768px) {
+            nav { padding: 0 80px; }
+            .hero { padding: 80px 80px; flex-direction: row; }
+            .hero-title { font-size: 52px; }
+        }

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 function EyeOff() {
@@ -24,161 +24,123 @@ function Eye() {
   );
 }
 
-export default function AuthRegisterClient() {
+export default function AuthLoginClient() {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const initialSeller = searchParams.get("role") === "seller";
-  const [roleSeller, setRoleSeller] = useState(initialSeller);
-  const [pw1, setPw1] = useState(false);
-  const [pw2, setPw2] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    phone: "",
-    password: "",
-    confirmPassword: "",
-    agreeTerms: false,
-  });
-
-  const handleInputChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: type === "checkbox" ? checked : value,
-    }));
-  };
-
-  const handleRegister = (e) => {
+  const handleLogin = (e) => {
     e.preventDefault();
-    
-    if (!formData.firstName || !formData.lastName || !formData.email || !formData.password) {
-      alert("Please fill in all required fields.");
+    if (!email || !password) {
+      alert("Please enter both email and password.");
       return;
     }
-
-    if (formData.password !== formData.confirmPassword) {
-      alert("Passwords do not match!");
-      return;
+    // Simple mock logic: if email contains 'seller', go to seller dashboard
+    if (email.toLowerCase().includes("seller")) {
+      router.push("/seller/dashboard");
+    } else {
+      router.push("/buyer/dashboard");
     }
-
-    if (!formData.agreeTerms) {
-      alert("You must agree to the Terms of Service to continue.");
-      return;
-    }
-
-    alert(`Success! Account created for ${formData.firstName}. Welcome to Susync!`);
-    router.push(roleSeller ? "/seller/dashboard" : "/buyer/dashboard");
   };
 
   return (
     <>
-      <Link href="/" className="logo-link">
-        <div className="logo-icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3">
+      <style jsx global>{`
+        :root { --primary: #1A56DB; --primary-100: #EBF2FF; --neutral-900: #111827; --neutral-500: #6B7280; --border: #E5E7EB; }
+        body { font-family: 'Poppins', sans-serif; background: var(--primary-100); width: 1440px; margin: 0 auto; height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; }
+        
+        .logo-head { display: flex; align-items: center; gap: 8px; margin-bottom: 32px; text-decoration: none; }
+        .logo-box { width: 36px; height: 36px; background: var(--primary); border-radius: 10px; display: flex; align-items: center; justify-content: center; }
+        .logo-txt { font-size: 24px; font-weight: 700; color: var(--primary); letter-spacing: -0.5px; }
+
+        .auth-card { background: white; width: 480px; padding: 40px; border-radius: 20px; box-shadow: 0 8px 32px rgba(26,23,20,0.16); }
+        .tabs { display: flex; background: #F3F4F6; padding: 4px; border-radius: 14px; margin-bottom: 32px; }
+        .tab { flex: 1; padding: 10px; text-align: center; font-size: 14px; font-weight: 600; color: var(--neutral-500); cursor: pointer; border-radius: 10px; border: none; }
+        .tab.active { background: var(--primary); color: white; box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
+
+        .form-group { margin-bottom: 20px; text-align: left; }
+        label { display: block; font-size: 14px; font-weight: 500; margin-bottom: 6px; color: var(--neutral-900); }
+        input { width: 100%; height: 48px; border: 1.5px solid var(--border); border-radius: 10px; padding: 0 16px; font-family: inherit; font-size: 14px; outline: none; }
+        input:focus { border-color: var(--primary); }
+        
+        .input-with-icon { position: relative; width: 100%; }
+        .input-with-icon input { padding-right: 44px; }
+        .password-toggle-btn { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: var(--neutral-500); padding: 0; display: flex; align-items: center; justify-content: center; }
+        
+        .btn-submit { width: 100%; height: 48px; background: var(--primary); color: white; border: none; border-radius: 10px; font-weight: 600; font-size: 16px; margin-top: 12px; cursor: pointer; }
+        
+        .trust-row { display: flex; gap: 24px; margin-top: 40px; }
+        .trust-item { font-size: 12px; color: var(--neutral-500); display: flex; align-items: center; gap: 6px; }
+      `}</style>
+
+      <Link href="/" className="logo-head">
+        <div className="logo-box">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3">
             <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
           </svg>
         </div>
-        <span className="logo-text">Susync</span>
+        <span className="logo-txt">Susync</span>
       </Link>
 
       <div className="auth-card">
-        <div className="tab-switcher">
-          <Link href="/login" className="tab-btn" style={{ textDecoration: "none", textAlign: "center", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "inherit" }}>
-            Login
-          </Link>
-          <button type="button" className="tab-btn active">
-            Register
-          </button>
+        <div className="tabs">
+          <div className="tab active">Login</div>
+          <Link href="/register" className="tab" style={{ textDecoration: "none" }}>Register</Link>
         </div>
 
-        <form onSubmit={handleRegister}>
-          <div className="form-title">
-            <h2>Create your account</h2>
-            <p>Join thousands of Filipino property seekers</p>
-          </div>
+        <h2 style={{ fontWeight: 700, marginBottom: 8, textAlign: "center" }}>Welcome back</h2>
+        <p style={{ color: "var(--neutral-500)", fontSize: 14, marginBottom: 32, textAlign: "center" }}>
+          Sign in to your Susync account
+        </p>
 
-          <div className="field-grid">
-            <div className="form-field">
-              <label>First Name</label>
-              <input type="text" name="firstName" placeholder="First Name" value={formData.firstName} onChange={handleInputChange} required />
-            </div>
-            <div className="form-field">
-              <label>Last Name</label>
-              <input type="text" name="lastName" placeholder="Last Name" value={formData.lastName} onChange={handleInputChange} required />
-            </div>
-          </div>
-
-          <div className="form-field">
+        <form onSubmit={handleLogin}>
+          <div className="form-group">
             <label>Email Address</label>
-            <input type="email" name="email" placeholder="you@email.com" value={formData.email} onChange={handleInputChange} required />
+            <input 
+              type="email" 
+              placeholder="you@email.com" 
+              value={email} 
+              onChange={(e) => setEmail(e.target.value)} 
+              required 
+            />
           </div>
 
-          <div className="form-field">
-            <label>Mobile Number</label>
-            <div className="mobile-wrap">
-              <div className="prefix">+63</div>
-              <input type="tel" name="phone" placeholder="9XX XXX XXXX" style={{ flex: 1 }} value={formData.phone} onChange={handleInputChange} />
-            </div>
-          </div>
-
-          <div className="form-field">
+          <div className="form-group">
             <label>Password</label>
             <div className="input-with-icon">
-              <input type={pw1 ? "text" : "password"} name="password" placeholder="Create a password" value={formData.password} onChange={handleInputChange} required />
-              <button type="button" className="password-toggle-btn" aria-label="Toggle password visibility" onClick={() => setPw1((x) => !x)}>
-                {pw1 ? <Eye /> : <EyeOff />}
+              <input 
+                type={showPassword ? "text" : "password"} 
+                placeholder="Password" 
+                value={password} 
+                onChange={(e) => setPassword(e.target.value)} 
+                required 
+              />
+              <button 
+                type="button" 
+                className="password-toggle-btn" 
+                aria-label="Toggle password visibility" 
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? <Eye /> : <EyeOff />}
               </button>
             </div>
           </div>
 
-          <div className="form-field">
-            <label>Confirm Password</label>
-            <div className="input-with-icon">
-              <input type={pw2 ? "text" : "password"} name="confirmPassword" placeholder="Confirm your password" value={formData.confirmPassword} onChange={handleInputChange} required />
-              <button type="button" className="password-toggle-btn" aria-label="Toggle confirm password visibility" onClick={() => setPw2((x) => !x)}>
-                {pw2 ? <Eye /> : <EyeOff />}
-              </button>
-            </div>
+          <div style={{ textAlign: "right", marginBottom: 16 }}>
+            <Link href="#" style={{ fontSize: 12, color: "var(--primary)", textDecoration: "none", fontWeight: 600 }}>
+              Forgot Password?
+            </Link>
           </div>
 
-          <div className="form-field">
-            <label>I am a...</label>
-            <div className="role-box">
-              <button type="button" className={`role-opt${!roleSeller ? " active" : ""}`} onClick={() => setRoleSeller(false)}>
-                Buyer / Renter
-              </button>
-              <button type="button" className={`role-opt${roleSeller ? " active" : ""}`} onClick={() => setRoleSeller(true)}>
-                Seller / Landlord
-              </button>
-            </div>
-          </div>
-
-          <div className="checkbox-row">
-            <input type="checkbox" id="terms" name="agreeTerms" checked={formData.agreeTerms} onChange={handleInputChange} />
-            <span>
-              I agree to Susync&apos;s{" "}
-              <Link href="/terms" style={{ color: "var(--primary-500)", textDecoration: "none", fontWeight: 500 }}>
-                Terms of Service
-            </Link>{" "}
-              and{" "}
-              <Link href="/privacy" style={{ color: "var(--primary-500)", textDecoration: "none", fontWeight: 500 }}>
-                Privacy Policy
-              </Link>
-            </span>
-          </div>
-
-          <button type="submit" className="btn-submit">
-            Create Account
-          </button>
+          <button type="submit" className="btn-submit">Login</button>
         </form>
       </div>
 
-      <div className="trust-badges">
-        <div className="badge">🔒 256-bit SSL</div>
-        <div className="badge">🛡️ DICT Compliant</div>
-        <div className="badge">✅ Secure Platform</div>
+      <div className="trust-row">
+        <div className="trust-item">🔒 256-bit SSL</div>
+        <div className="trust-item">🛡️ DICT Compliant</div>
+        <div className="trust-item">✅ Secure Platform</div>
       </div>
     </>
   );

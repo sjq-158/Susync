@@ -22,7 +22,7 @@
             background-color: var(--neutral-100); 
             color: var(--neutral-900); 
             /* Strict Figma Width */
-            width: 1440px; 
+            width: 100%; max-width: 1440px; 
             margin: 0 auto; 
             height: 100vh;
             overflow: hidden;
