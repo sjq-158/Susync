@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Susync — Buyer Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-500: #1A56DB;
+            --primary-100: #EBF2FF;
+            --accent-500: #92400E;
+            --accent-100: #FEF3C7;
+            --neutral-100: #fbfbf9;
+            --neutral-500: #6B7280;
+            --neutral-900: #111827;
+            --border: #E5E7EB;
+            --white: #ffffff;
+            --verified-bg: #dcfce7;
+            --verified-text: #15803d;
+            --shadow-card: 0 1px 4px rgba(26,23,20,0.08), 0 2px 12px rgba(26,23,20,0.06);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; background-color: var(--neutral-100); color: var(--neutral-900); width: 1440px; margin: 0 auto; min-height: 100vh; overflow-x: hidden; }
+
+        /* --- Sidebar Toggle Logic (Pure CSS) --- */
+        #sidebar-toggle { display: none; }
+
+        /* Navbar */
+        nav { height: 72px; padding: 0 60px; background: var(--white); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
+        .header-left { display: flex; align-items: center; gap: 20px; }
+        
+        .hamburger {
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            transition: background 0.2s;
+        }
+        .hamburger:hover { background: var(--neutral-100); }
+        .hamburger span { width: 22px; height: 2px; background: var(--neutral-900); border-radius: 2px; }
+
+        .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .logo-box { width: 32px; height: 32px; background: var(--primary-500); border-radius: 8px; display: flex; align-items: center; justify-content: center; }
+        .logo-text { font-size: 22px; font-weight: 700; color: var(--primary-500); }
+        .nav-user { display: flex; align-items: center; gap: 12px; }
+        .avatar-sm { width: 38px; height: 38px; border-radius: 50%; background: var(--primary-500); color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; }
+
+        /* Layout */
+        .dashboard-container { display: flex; min-height: calc(100vh - 72px); }
+
+        /* Sidebar */
+        aside { 
+            width: 260px; background: var(--white); border-right: 1px solid var(--border); padding: 32px 16px; flex-shrink: 0; 
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden; display: flex; flex-direction: column;
+        }
+        /* Toggle Effect */
+        #sidebar-toggle:checked ~ .dashboard-container aside {
+            width: 0;
+            padding: 32px 0;
+            opacity: 0;
+            transform: translateX(-260px);
+            border-right: none;
+        }
+        .side-item { display: flex; align-items: center; gap: 12px; padding: 12px 16px; text-decoration: none; color: var(--neutral-900); font-size: 14px; font-weight: 500; border-radius: 8px; margin-bottom: 4px; }
+        .side-item.active { background: var(--primary-100); color: var(--primary-500); border-left: 4px solid var(--primary-500); padding-left: 12px; }
+        .side-item:hover:not(.active) { background: #f3f4f6; }
+
+        /* Main Content */
+        main { flex: 1; padding: 40px 60px; }
+        .welcome-msg h1 { font-size: 24px; font-weight: 800; }
+        .welcome-msg p { font-size: 14px; color: var(--neutral-500); margin-top: 4px; }
+
+        /* Stats Grid */
+        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 32px; }
+        .stat-card { background: var(--white); border: 1px solid var(--border); padding: 24px; border-radius: 14px; box-shadow: var(--shadow-card); }
+        .stat-card .val { font-size: 24px; font-weight: 800; color: var(--primary-500); display: block; }
+        .stat-card .label { font-size: 12px; color: var(--neutral-500); font-weight: 600; text-transform: uppercase; margin-top: 4px; }
+
+        /* Section Styling */
+        section { margin-top: 48px; }
+        .section-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 20px; }
+        .section-header h2 { font-size: 18px; font-weight: 700; }
+        .section-header a { font-size: 14px; color: var(--primary-500); font-weight: 600; text-decoration: none; }
+
+        /* Active Transaction Cards */
+        .tx-card { background: var(--white); border: 1px solid var(--border); padding: 16px; border-radius: 14px; display: flex; align-items: center; gap: 20px; margin-bottom: 12px; box-shadow: var(--shadow-card); }
+        .tx-img { width: 72px; height: 72px; border-radius: 10px; object-fit: cover; }
+        .tx-info { flex: 1; }
+        .tx-info h4 { font-size: 15px; font-weight: 700; color: var(--neutral-900); }
+        .tx-info p { font-size: 12px; color: var(--neutral-500); }
+        .tx-progress { width: 180px; text-align: right; }
+        .step-tag { font-size: 11px; font-weight: 700; color: var(--accent-500); background: var(--accent-100); padding: 4px 10px; border-radius: 6px; }
+        .progress-bar { height: 6px; background: #eee; border-radius: 3px; margin-top: 8px; position: relative; overflow: hidden; }
+        .progress-fill { position: absolute; left: 0; top: 0; height: 100%; background: var(--primary-500); border-radius: 3px; }
+
+        /* Activity Timeline */
+        .activity-box { background: var(--white); border: 1px solid var(--border); border-radius: 14px; padding: 0 20px; }
+        .activity-item { padding: 20px 0; border-bottom: 1px solid var(--border); display: flex; gap: 16px; align-items: center; }
+        .activity-item:last-child { border-bottom: none; }
+        .act-icon { width: 40px; height: 40px; border-radius: 50%; background: var(--primary-100); display: flex; align-items: center; justify-content: center; font-size: 16px; }
+        .act-text p { font-size: 14px; font-weight: 500; }
+        .act-text span { font-size: 12px; color: var(--neutral-500); }
+        .unread-dot { width: 8px; height: 8px; background: var(--primary-500); border-radius: 50%; margin-left: auto; }
+
+        /* Search & View Promo */
+        .search-promo { background: var(--primary-100); border: 1px solid var(--border); border-radius: 16px; padding: 40px; color: var(--neutral-900); display: flex; align-items: center; justify-content: space-between; margin-top: 32px; box-shadow: var(--shadow-card); }
+        .promo-text h2 { font-size: 22px; font-weight: 700; margin-bottom: 8px; }
+        .promo-text p { font-size: 14px; color: var(--neutral-500); margin-bottom: 24px; max-width: 500px; line-height: 1.5; }
+        .btn-promo { background: var(--primary-500); color: white; padding: 12px 32px; border-radius: 10px; text-decoration: none; font-weight: 700; font-size: 14px; display: inline-block; transition: all 0.2s; }
+        .btn-promo:hover { transform: translateY(-2px); background: #2563eb; box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4); }
+    </style>
+</head>
+<body>
+
+    <!-- Hidden Toggle -->
+    <input type="checkbox" id="sidebar-toggle">
+
+    <nav>
+        <div class="header-left">
+            <label for="sidebar-toggle" class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+            <a href="#" class="logo">
+                <div class="logo-box">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+                </div>
+                <span class="logo-text">Susync</span>
+            </a>
+        </div>
+        <div class="nav-user">
+            <div style="text-align: right;"><div style="font-size: 14px; font-weight: 700;">Juan dela Cruz</div><div style="font-size: 11px; color: var(--neutral-500);">Buyer Account</div></div>
+            <div class="avatar-sm">J</div>
+        </div>
+    </nav>
+
+    <div class="dashboard-container">
+        <aside>
+            <a href="#" class="side-item active">📊 Dashboard</a>
+            <a href="#" class="side-item">🔄 My Transactions</a>
+            <a href="#" class="side-item">💬 Messages</a>
+            <a href="#" class="side-item">❤️ Bookmark</a>
+            <a href="#" class="side-item">⚙️ Settings</a>
+            <div style="margin: 8px 16px; border-top: 1px solid var(--border); opacity: 0.6;"></div>
+            <a href="01_landing_page.html" class="side-item" style="color: #ef4444;">🚪 Logout</a>
+        </aside>
+
+        <main>
+            <div class="welcome-msg">
+                <h1>Good morning, Juan</h1>
+                <p>Here's your property activity summary.</p>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card"><span class="val">2</span><span class="label">Active Transactions</span></div>
+                <div class="stat-card"><span class="val">8</span><span class="label">Saved Properties</span></div>
+                <div class="stat-card"><span class="val">3</span><span class="label">Unread Messages</span></div>
+                <div class="stat-card"><span class="val" style="color:var(--verified-text)">75%</span><span class="label">Profile Complete</span></div>
+            </div>
+
+            <section class="search-promo">
+                <div class="promo-text">
+                    <h2>Find Your Next Dream Home</h2>
+                    <p>Explore thousands of verified listings with 360° virtual tours and connect directly with property owners.</p>
+                    <a href="view_properties_BUYER.html" class="btn-promo">Browse Properties</a>
+                </div>
+                <div style="font-size: 120px; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.1));">🏠</div>
+            </section>
+
+            <section>
+                <div class="section-header">
+                    <h2>Active Transactions</h2>
+                    <a href="#">View all deals →</a>
+                </div>
+                <div class="tx-card">
+                    <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=300" class="tx-img">
+                    <div class="tx-info">
+                        <h4>Modern 4BR House, Quezon City</h4>
+                        <p>SY-2025-04-0021 · ₱8,500,000</p>
+                    </div>
+                    <div class="tx-progress">
+                        <span class="step-tag">Step 3/5 — Contract</span>
+                        <div class="progress-bar"><div class="progress-fill" style="width: 60%;"></div></div>
+                    </div>
+                </div>
+                <div class="tx-card">
+                    <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=300" class="tx-img">
+                    <div class="tx-info">
+                        <h4>2BR Condo in BGC</h4>
+                        <p>SY-2025-03-0942 · ₱35,000/mo</p>
+                    </div>
+                    <div class="tx-progress">
+                        <span class="step-tag">Step 2/5 — Negotiation</span>
+                        <div class="progress-bar"><div class="progress-fill" style="width: 40%;"></div></div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <div class="section-header">
+                    <h2>Recent Activity</h2>
+                </div>
+                <div class="activity-box">
+                    <div class="activity-item">
+                        <div class="act-icon">💬</div>
+                        <div class="act-text"><p>Maria Santos replied to your inquiry about QC House</p><span>2 min ago</span></div>
+                        <div class="unread-dot"></div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="act-icon">📄</div>
+                        <div class="act-text"><p>Contract for BGC Condo is ready for review</p><span>1 hour ago</span></div>
+                        <div class="unread-dot"></div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="act-icon">✅</div>
+                        <div class="act-text"><p>Your identity has been verified successfully</p><span>Yesterday</span></div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+</body>
+</html>

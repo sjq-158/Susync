@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us — Susync</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-500: #1A56DB;
+            --primary-100: #EBF2FF;
+            --accent-500: #92400E;
+            --accent-100: #FEF3C7;
+            --neutral-100: #fbfbf9;
+            --neutral-500: #6B7280;
+            --neutral-900: #111827;
+            --border: #E5E7EB;
+            --white: #ffffff;
+            --shadow-card: 0 1px 4px rgba(26,23,20,0.08), 0 2px 12px rgba(26,23,20,0.06);
+            --shadow-overlay: 0 12px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+        body { font-family: 'Poppins', sans-serif; background-color: var(--neutral-100); color: var(--neutral-900); overflow-x: hidden; }
+
+        .figma-container { width: 1440px; margin: 0 auto; background: white; position: relative; min-height: 100vh; }
+
+        /* --- NAVBAR --- */
+        nav {
+            height: 72px;
+            padding: 0 80px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--white);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo { display: flex; align-items: center; gap: 8px; text-decoration: none; }
+        .logo-icon { width: 32px; height: 32px; background: var(--primary-500); border-radius: 8px; display: flex; align-items: center; justify-content: center; }
+        .logo-text { font-size: 22px; font-weight: 700; color: var(--primary-500); letter-spacing: -0.5px; }
+
+        .nav-links { display: flex; gap: 40px; }
+        .nav-links a { text-decoration: none; color: var(--neutral-900); font-size: 15px; font-weight: 500; }
+        .nav-links a:hover { color: var(--primary-500); }
+
+        .nav-auth { display: flex; gap: 12px; }
+        .btn-ghost { background: transparent; border: none; color: var(--neutral-900); font-weight: 600; padding: 8px 20px; cursor: pointer; font-family: inherit; }
+        .btn-primary-sm { background: var(--primary-500); color: white; border: none; border-radius: 8px; font-weight: 600; padding: 10px 24px; cursor: pointer; font-family: inherit; }
+
+        /* --- CONTACT HERO --- */
+        .contact-hero {
+            background: var(--primary-100);
+            padding: 80px 80px 120px;
+            text-align: center;
+        }
+        .hero-tag { color: var(--accent-500); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 16px; display: block; }
+        .hero-title { font-size: 48px; font-weight: 800; color: var(--neutral-900); margin-bottom: 24px; }
+        .hero-desc { font-size: 18px; color: var(--neutral-500); max-width: 600px; margin: 0 auto; line-height: 1.6; }
+
+        /* --- MAIN CONTENT --- */
+        .contact-content {
+            margin-top: -60px;
+            padding: 0 80px 100px;
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 40px;
+        }
+
+        /* Contact Info Cards */
+        .info-sidebar { display: flex; flex-direction: column; gap: 24px; }
+        .info-card {
+            background: white;
+            padding: 32px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-card);
+        }
+        .info-item { display: flex; gap: 20px; margin-bottom: 32px; }
+        .info-item:last-child { margin-bottom: 0; }
+        .icon-box {
+            width: 48px; height: 48px; border-radius: 12px;
+            background: var(--primary-100); color: var(--primary-500);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 20px; flex-shrink: 0;
+        }
+        .info-text h4 { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+        .info-text p { font-size: 14px; color: var(--neutral-500); line-height: 1.5; }
+
+        /* Contact Form Card */
+        .form-card {
+            background: white;
+            padding: 48px;
+            border-radius: 24px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-overlay);
+        }
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; }
+        .form-group { display: flex; flex-direction: column; gap: 8px; }
+        .full-width { grid-column: span 2; }
+        
+        label { font-size: 13px; font-weight: 600; color: var(--neutral-900); }
+        input, select, textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1.5px solid var(--border);
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 14px;
+            transition: all 0.2s;
+            background: var(--neutral-100);
+        }
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary-500);
+            background: white;
+            box-shadow: 0 0 0 4px rgba(26, 86, 219, 0.1);
+        }
+        textarea { height: 150px; resize: none; }
+
+        .btn-submit {
+            width: 100%;
+            padding: 16px;
+            background: var(--primary-500);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.2s;
+        }
+        .btn-submit:hover { background: #1e40af; transform: translateY(-2px); }
+
+        /* --- FAQ SECTION --- */
+        .faq-section { padding: 80px; background: var(--neutral-100); text-align: center; }
+        .faq-title { font-size: 32px; font-weight: 800; margin-bottom: 48px; }
+        .faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 1100px; margin: 0 auto; text-align: left; }
+        .faq-item { background: white; padding: 24px; border-radius: 16px; border: 1px solid var(--border); }
+        .faq-item h5 { font-size: 15px; font-weight: 700; margin-bottom: 12px; color: var(--primary-500); }
+        .faq-item p { font-size: 13px; color: var(--neutral-500); line-height: 1.6; }
+
+        /* --- FOOTER --- */
+        footer { background: var(--neutral-900); padding: 80px 80px 40px; color: white; }
+        .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 60px; margin-bottom: 60px; }
+        .f-col h4 { font-size: 13px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 24px; color: white; }
+        .f-col a { display: block; color: var(--neutral-500); text-decoration: none; font-size: 14px; margin-bottom: 12px; }
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 32px; display: flex; justify-content: space-between; font-size: 11px; color: var(--neutral-500); }
+    </style>
+</head>
+<body>
+
+<div class="figma-container">
+    <!-- Navbar -->
+    <nav>
+        <a href="01_landing_page.html" class="logo">
+            <div class="logo-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+            </div>
+            <span class="logo-text">Susync</span>
+        </a>
+        <div class="nav-auth">
+            <button class="btn-ghost">Login</button>
+            <button class="btn-primary-sm">Get Started</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="contact-hero">
+        <span class="hero-tag">Get in Touch</span>
+        <h1 class="hero-title">We're here to help you find home.</h1>
+        <p class="hero-desc">Have questions about a listing or how our digital closing process works? Our team is ready to assist you every step of the way.</p>
+    </section>
+
+    <!-- Main Contact Area -->
+    <section class="contact-content">
+        <!-- Left Side: Contact Info -->
+        <div class="info-sidebar">
+            <div class="info-card">
+                <div class="info-item">
+                    <div class="icon-box">📍</div>
+                    <div class="info-text">
+                        <h4>Our Headquarters</h4>
+                        <p>12th Floor, Apple One Tower<br>Cebu IT Park, Cebu City 6000</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="icon-box">✉️</div>
+                    <div class="info-text">
+                        <h4>Email Support</h4>
+                        <p>General: hello@susync.com<br>Support: help@susync.com</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="icon-box">📞</div>
+                    <div class="info-text">
+                        <h4>Telephone Number</h4>
+                        <p>Mon-Fri (9AM - 6PM)<br>+63 (32) 234 8888</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-card" style="background: var(--accent-500); color: white; border: none;">
+                <h4 style="margin-bottom: 12px; font-size: 18px;">Are you an owner?</h4>
+                <p style="color: rgba(255,255,255,0.8); font-size: 14px; line-height: 1.6; margin-bottom: 20px;">
+                    Join 5,000+ verified owners who close deals faster using our digital paperwork and secure payment system.
+                </p>
+                <button style="background: white; color: var(--accent-500); border: none; padding: 12px 24px; border-radius: 8px; font-weight: 700; cursor: pointer; width: 100%;">List Your Property →</button>
+            </div>
+        </div>
+
+        <!-- Right Side: Contact Form -->
+        <div class="form-card">
+            <form>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>First Name</label>
+                        <input type="text" placeholder="First Name">
+                    </div>
+                    <div class="form-group">
+                        <label>Last Name</label>
+                        <input type="text" placeholder="Last Name">
+                    </div>
+                    <div class="form-group full-width">
+                        <label>Email Address</label>
+                        <input type="email" placeholder="you@email.com">
+                    </div>
+                    <div class="form-group full-width">
+                        <label>Inquiry Type</label>
+                        <select>
+                            <option>General Inquiry</option>
+                            <option>Verification Support</option>
+                            <option>Technical Issue</option>
+                            <option>Partnership Proposal</option>
+                        </select>
+                    </div>
+                    <div class="form-group full-width">
+                        <label>Your Message</label>
+                        <textarea placeholder="Tell us how we can help you..."></textarea>
+                    </div>
+                </div>
+                <button type="button" class="btn-submit">Send Message</button>
+                <p style="font-size: 11px; color: var(--neutral-500); text-align: center; margin-top: 16px;">
+                    By clicking send, you agree to our <a href="#" style="color: var(--primary-500);">Privacy Policy</a>.
+                </p>
+            </form>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <h2 class="faq-title">Frequently Asked Questions</h2>
+        <div class="faq-grid">
+            <div class="faq-item">
+                <h5>How does the verification work?</h5>
+                <p>We verify every owner via Government ID and every property via title check (TCT) to ensure all listings are 100% legitimate and scam-free.</p>
+            </div>
+            <div class="faq-item">
+                <h5>Is it free to browse properties?</h5>
+                <p>Yes! Browsing and contacting owners is free. We only charge a small transaction fee once a digital contract is successfully signed and paid for.</p>
+            </div>
+            <div class="faq-item">
+                <h5>Are digital contracts legally binding?</h5>
+                <p>Yes. Our digital contracts comply with the Philippine Electronic Commerce Act (R.A. 8792), making them fully legal, secure, and enforceable in the Philippines.</p>
+            </div>
+            <div class="faq-item">
+                <h5>What if I need a physical viewing?</h5>
+                <p>While we offer 360° virtual tours, you can easily schedule a physical viewing through our built-in calendar system after messaging the owner.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div class="f-brand">
+                <a href="#" class="logo">
+                    <div class="logo-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg></div>
+                    <span class="logo-text" style="color: white;">Susync</span>
+                </a>
+                <p style="color: var(--neutral-500); margin-top: 16px; font-size: 14px;">Philippines' first all-in-one digital real estate platform. No middlemen, no paperwork.</p>
+            </div>
+            <div class="f-col">
+                <h4>Product</h4>
+                <a href="#">Browse Properties</a>
+                <a href="#">How It Works</a>
+                <a href="#">Virtual Tours</a>
+            </div>
+            <div class="f-col">
+                <h4>Company</h4>
+                <a href="#">About Us</a>
+                <a href="#">Careers</a>
+                <a href="#">Contact Us</a>
+            </div>
+            <div class="f-col">
+                <h4>Support</h4>
+                <a href="#">Help Center</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>© 2025 Susync Inc. All rights reserved. Licensed by HLURB.</span>
+            <span>DICT Compliant · 256-bit SSL Encrypted</span>
+        </div>
+    </footer>
+</div>
+
+</body>
+</html>

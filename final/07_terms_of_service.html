@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Service — Susync</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Susync Brand Tokens */
+            --primary-500: #1A56DB;
+            --primary-100: #EBF2FF;
+            --accent-500: #92400E;
+            --accent-100: #FEF3C7;
+            --neutral-100: #fbfbf9;
+            --neutral-500: #6B7280;
+            --neutral-900: #111827;
+            --border: #E5E7EB;
+            --white: #ffffff;
+            
+            /* Shadows */
+            --shadow-card: 0 1px 4px rgba(26,23,20,0.08), 0 2px 12px rgba(26,23,20,0.06);
+            --shadow-overlay: 0 8px 32px rgba(26,23,20,0.16);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+        
+        body { 
+            font-family: 'Poppins', sans-serif; 
+            background-color: var(--neutral-100); 
+            color: var(--neutral-900); 
+            width: 1440px; 
+            margin: 0 auto; 
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* --- Navbar --- */
+        nav {
+            height: 72px;
+            padding: 0 80px;
+            background: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            display: flex; align-items: center; gap: 8px;
+            color: var(--primary-500); text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 32px; height: 32px; background: var(--primary-500);
+            border-radius: 8px; display: flex; align-items: center; justify-content: center;
+        }
+
+        .logo-text { font-size: 22px; font-weight: 700; letter-spacing: -0.5px; }
+
+        .nav-auth { display: flex; gap: 12px; }
+        .btn-ghost { background: transparent; border: none; color: var(--neutral-900); font-weight: 600; padding: 8px 20px; cursor: pointer; font-family: inherit; }
+        .btn-primary-sm { background: var(--primary-500); color: white; border: none; border-radius: 8px; font-weight: 600; padding: 10px 24px; cursor: pointer; font-family: inherit; }
+
+        /* --- Layout Container --- */
+        .figma-container {
+            width: 1440px;
+            margin: 0 auto;
+            background: var(--white);
+            position: relative;
+        }
+
+        main {
+            padding: 100px 130px;
+            background: var(--white);
+            max-width: 1440px;
+            margin: 0 auto;
+        }
+
+        .policy-header { margin-bottom: 48px; border-bottom: 1px solid var(--border); padding-bottom: 32px; }
+        .policy-header h1 { font-size: 48px; font-weight: 800; color: var(--neutral-900); margin-bottom: 12px; }
+        .policy-header p { color: var(--neutral-500); font-size: 16px; }
+
+        .policy-section { 
+            margin-bottom: 56px; 
+            max-width: 900px;
+        }
+
+        .policy-section h2 { 
+            font-size: 20px; 
+            font-weight: 700; 
+            color: var(--neutral-900); 
+            margin-bottom: 16px; 
+            display: flex; 
+            align-items: center; 
+            gap: 12px; 
+        }
+        .section-number { 
+            width: 28px; height: 28px; background: var(--primary-100); color: var(--primary-500); 
+            border-radius: 6px; display: flex; align-items: center; justify-content: center; 
+            font-size: 12px; font-weight: 700; 
+        }
+
+        .policy-content { 
+            font-size: 15px; 
+            line-height: 1.8; 
+            color: var(--neutral-500); 
+        }
+        .policy-content p { margin-bottom: 16px; }
+        .policy-content ul { margin-left: 20px; margin-bottom: 16px; }
+        .policy-content li { margin-bottom: 8px; }
+        
+        .highlight-box {
+            background: var(--neutral-100);
+            border: 1px solid var(--border);
+            padding: 24px;
+            border-radius: 16px;
+            margin-top: 24px;
+        }
+        .highlight-box h4 { color: var(--neutral-900); font-weight: 700; margin-bottom: 8px; font-size: 14px; }
+
+        /* --- Footer --- */
+        footer {
+            background: var(--neutral-900); padding: 80px 80px 40px; color: white;
+        }
+        .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 60px; margin-bottom: 60px; }
+        .f-col h4 { font-size: 13px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 24px; color: white; }
+        .f-col a { display: block; color: var(--neutral-500); text-decoration: none; font-size: 14px; margin-bottom: 12px; }
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 32px; display: flex; justify-content: space-between; font-size: 11px; color: var(--neutral-500); }
+        .f-brand p { color: var(--neutral-500); font-size: 14px; line-height: 1.6; margin-top: 16px; max-width: 260px; }
+
+    </style>
+</head>
+<body>
+    <div class="figma-container">
+        <!-- Navbar -->
+        <nav>
+            <a href="#" class="logo">
+                <div class="logo-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                </div>
+                <span class="logo-text">Susync</span>
+            </a>
+            <div class="nav-auth">
+                <button class="btn-ghost">Login</button>
+                <button class="btn-primary-sm">Get Started</button>
+            </div>
+        </nav>
+
+        <main>
+            <div class="policy-header">
+                <h1>Terms of Service</h1>
+                <p>Last updated: May 12, 2026</p>
+            </div>
+
+            <div class="policy-section">
+                <h2><span class="section-number">01</span> Acceptance of Terms</h2>
+                <div class="policy-content">
+                    <p>Welcome to Susync. These Terms of Service govern your access to and use of our all-in-one digital property platform in the Philippines. By creating an account, browsing listings, or completing any transaction-related action on Susync, you agree to be bound by these terms.</p>
+                    <p>If you do not agree, please discontinue use of the platform. We may update these terms from time to time; continued use after changes constitutes acceptance of the revised terms.</p>
+                </div>
+            </div>
+
+            <div class="policy-section">
+                <h2><span class="section-number">02</span> Eligible Use</h2>
+                <div class="policy-content">
+                    <p>Susync is intended for users who are legally able to enter into contracts in the Philippines. You agree to provide accurate registration information and to keep your credentials secure.</p>
+                    <ul>
+                        <li><strong>Buyers and sellers</strong> must act in good faith during negotiations, document exchange, and payment steps facilitated through the platform.</li>
+                        <li><strong>Prohibited conduct</strong> includes misrepresenting property details, impersonation, fraud, harassment, or attempts to circumvent Susync’s verification or payment safeguards.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="policy-section">
+                <h2><span class="section-number">03</span> Accounts &amp; Roles</h2>
+                <div class="policy-content">
+                    <p>Accounts may be designated for buying, selling, or both as permitted by the product. You are responsible for all activity under your account.</p>
+                    <p>Susync may suspend or terminate accounts that violate these terms, applicable law, or regulatory guidance from authorities such as the DICT or HLURB.</p>
+                </div>
+            </div>
+
+            <div class="policy-section">
+                <h2><span class="section-number">04</span> Listings, Contracts &amp; Payments</h2>
+                <div class="policy-content">
+                    <p>Listings and transaction milestones shown in the tracker reflect information supplied by users and platform workflows. Digital contracts and payment instructions should be reviewed carefully before you confirm.</p>
+                    <div class="highlight-box">
+                        <h4>📌 Important</h4>
+                        <p>Susync provides tools to connect parties and streamline the journey online. You remain responsible for due diligence on titles, taxes, and local requirements, and for consulting licensed professionals when appropriate.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="policy-section">
+                <h2><span class="section-number">05</span> Limitation of Liability</h2>
+                <div class="policy-content">
+                    <p>To the fullest extent permitted by law, Susync and its affiliates are not liable for indirect, incidental, or consequential damages arising from use of the platform, including disputes between buyers and sellers, delays by third-party banks, or force majeure events.</p>
+                </div>
+            </div>
+
+            <div class="policy-section">
+                <h2><span class="section-number">06</span> Contact</h2>
+                <div class="policy-content">
+                    <p>For questions about these Terms of Service, contact us at:</p>
+                    <p><strong>Email:</strong> legal@susync.com<br>
+                    <strong>Address:</strong> 12th Floor, Apple One Tower, Cebu IT Park, Cebu City</p>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <div class="footer-grid">
+                <div class="f-brand">
+                    <a href="#" class="logo">
+                        <div class="logo-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg></div>
+                        <span class="logo-text" style="color: white;">Susync</span>
+                    </a>
+                    <p>Philippines' first all-in-one digital real estate platform. No middlemen, no paperwork.</p>
+                </div>
+                <div class="f-col">
+                    <h4>Product</h4>
+                    <a href="#">Virtual Tours</a>
+                    <a href="#">Progress Tracker</a>
+                </div>
+                <div class="f-col">
+                    <h4>Company</h4>
+                    <a href="#">Careers</a>
+                    <a href="#">Blog</a>
+                </div>
+                <div class="f-col">
+                    <h4>Support</h4>
+                    <a href="#">Help Center</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>© 2025 Susync Inc. All rights reserved. Licensed by HLURB.</span>
+                <span>DICT Compliant · 256-bit SSL Encrypted</span>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

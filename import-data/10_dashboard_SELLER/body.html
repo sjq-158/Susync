@@ -1,0 +1,102 @@
+<!-- Hidden Toggle -->
+    <input type="checkbox" id="sidebar-toggle">
+
+    <header>
+        <div class="header-left">
+            <label for="sidebar-toggle" class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+            <a href="/seller/dashboard" class="logo">
+                <div class="logo-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                </div>
+                <span class="logo-text">Susync</span>
+            </a>
+        </div>
+        <div class="user-profile">
+            <div class="user-info">
+                <span class="user-name">Maria Santos</span>
+                <span class="user-role">Seller Account</span>
+            </div>
+            <div class="user-avatar">M</div>
+        </div>
+    </header>
+
+    <div class="container">
+        <aside>
+            <a href="/seller/properties" class="nav-item active">🏠 My Properties</a>
+            <a href="/seller/sales" class="nav-item">📈 Sales Activity</a>
+            <a href="/seller/messages" class="nav-item">💬 Inquiries (12)</a>
+            <a href="/seller/documents" class="nav-item">📄 Documents</a>
+            <a href="/seller/settings" class="nav-item">⚙️ Settings</a>
+        </aside>
+
+        <main>
+            <div class="page-header">
+                <div class="page-title">
+                    <h1>Property Management</h1>
+                    <p>Track your listings, views, and inquiries performance.</p>
+                </div>
+                <button class="btn-list">+ List New Property</button>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-val">₱10.2M</span>
+                    <span class="stat-label">Total Closed Sales</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-val">5</span>
+                    <span class="stat-label">Active Listings</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-val">12</span>
+                    <span class="stat-label">New Inquiries</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-val" style="color: var(--primary-500);">62%</span>
+                    <span class="stat-label">Inquiry Conversion</span>
+                </div>
+            </div>
+
+            <div class="section-header">
+                <h2>Your Properties</h2>
+            </div>
+
+            <div class="listing-card">
+                <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&q=80&w=400" alt="House" class="listing-img">
+                <div class="listing-body">
+                    <span class="status-badge status-active">Active</span>
+                    <h3 class="listing-title">Modern 4BR House in Cebu City</h3>
+                    <div class="listing-stats">
+                        <div class="l-stat">Views: <b>1,240</b></div>
+                        <div class="l-stat">Inquiries: <b>8</b></div>
+                        <div class="l-stat">Days Listed: <b>12</b></div>
+                    </div>
+                </div>
+                <div class="listing-actions">
+                    <button class="btn-action">Edit Listing</button>
+                    <button class="btn-action">View Analytics</button>
+                </div>
+            </div>
+
+            <div class="listing-card">
+                <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&q=80&w=400" alt="Condo" class="listing-img">
+                <div class="listing-body">
+                    <span class="status-badge status-negotiation">Negotiation</span>
+                    <h3 class="listing-title">2BR Condo in Cebu IT Park</h3>
+                    <div class="listing-stats">
+                        <div class="l-stat">Views: <b>4,890</b></div>
+                        <div class="l-stat">Inquiries: <b>32</b></div>
+                        <div class="l-stat">Offers: <b>2</b></div>
+                    </div>
+                </div>
+                <div class="listing-actions">
+                    <button class="btn-action btn-primary-action">Review Offers</button>
+                    <button class="btn-action">Edit Listing</button>
+                </div>
+            </div>
+        </main>
+    </div>

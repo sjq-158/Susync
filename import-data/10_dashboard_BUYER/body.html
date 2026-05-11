@@ -1,0 +1,108 @@
+<!-- Hidden Toggle -->
+    <input type="checkbox" id="sidebar-toggle">
+
+    <nav>
+        <div class="header-left">
+            <label for="sidebar-toggle" class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+            <a href="/buyer/dashboard" class="logo">
+                <div class="logo-box">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+                </div>
+                <span class="logo-text">Susync</span>
+            </a>
+        </div>
+        <div class="nav-user">
+            <div style="text-align: right;"><div style="font-size: 14px; font-weight: 700;">Juan dela Cruz</div><div style="font-size: 11px; color: var(--neutral-500);">Buyer Account</div></div>
+            <div class="avatar-sm">J</div>
+        </div>
+    </nav>
+
+    <div class="dashboard-container">
+        <aside>
+            <a href="/buyer/dashboard" class="side-item active">📊 Dashboard</a>
+            <a href="/buyer/transactions?tab=all" class="side-item">🔄 My Transactions</a>
+            <a href="/buyer/messages" class="side-item">💬 Messages</a>
+            <a href="/buyer/saved" class="side-item">❤️ Bookmark</a>
+            <a href="/buyer/settings" class="side-item">⚙️ Settings</a>
+            <div style="margin: 8px 16px; border-top: 1px solid var(--border); opacity: 0.6;"></div>
+            <a href="/" class="side-item" style="color: #ef4444;">🚪 Logout</a>
+        </aside>
+
+        <main>
+            <div class="welcome-msg">
+                <h1>Good morning, Juan</h1>
+                <p>Here's your property activity summary.</p>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card"><span class="val">2</span><span class="label">Active Transactions</span></div>
+                <div class="stat-card"><span class="val">8</span><span class="label">Saved Properties</span></div>
+                <div class="stat-card"><span class="val">3</span><span class="label">Unread Messages</span></div>
+                <div class="stat-card"><span class="val" style="color:var(--verified-text)">75%</span><span class="label">Profile Complete</span></div>
+            </div>
+
+            <section class="search-promo">
+                <div class="promo-text">
+                    <h2>Find Your Next Dream Home</h2>
+                    <p>Explore thousands of verified listings with 360° virtual tours and connect directly with property owners.</p>
+                    <a href="/buyer/properties" class="btn-promo">Browse Properties</a>
+                </div>
+                <div style="font-size: 120px; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.1));">🏠</div>
+            </section>
+
+            <section>
+                <div class="section-header">
+                    <h2>Active Transactions</h2>
+                    <a href="/buyer/transactions?tab=all">View all deals →</a>
+                </div>
+                <div class="tx-card">
+                    <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=300" class="tx-img">
+                    <div class="tx-info">
+                        <h4>Modern 4BR House, Cebu City</h4>
+                        <p>SY-2025-04-0021 · ₱8,500,000</p>
+                    </div>
+                    <div class="tx-progress">
+                        <span class="step-tag">Step 3/5 — Contract</span>
+                        <div class="progress-bar"><div class="progress-fill" style="width: 60%;"></div></div>
+                    </div>
+                </div>
+                <div class="tx-card">
+                    <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=300" class="tx-img">
+                    <div class="tx-info">
+                        <h4>2BR Condo in Cebu IT Park</h4>
+                        <p>SY-2025-03-0942 · ₱35,000/mo</p>
+                    </div>
+                    <div class="tx-progress">
+                        <span class="step-tag">Step 2/5 — Negotiation</span>
+                        <div class="progress-bar"><div class="progress-fill" style="width: 40%;"></div></div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <div class="section-header">
+                    <h2>Recent Activity</h2>
+                </div>
+                <div class="activity-box">
+                    <div class="activity-item">
+                        <div class="act-icon">💬</div>
+                        <div class="act-text"><p>Maria Santos replied to your inquiry about Cebu House</p><span>2 min ago</span></div>
+                        <div class="unread-dot"></div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="act-icon">📄</div>
+                        <div class="act-text"><p>Contract for IT Park Condo is ready for review</p><span>1 hour ago</span></div>
+                        <div class="unread-dot"></div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="act-icon">✅</div>
+                        <div class="act-text"><p>Your identity has been verified successfully</p><span>Yesterday</span></div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>

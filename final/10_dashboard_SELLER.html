@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Susync — Seller Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Susync Brand Tokens */
+            --primary-500: #1A56DB;
+            --primary-100: #EBF2FF;
+            --accent-500: #92400E;
+            --accent-100: #FEF3C7;
+            --neutral-100: #fbfbf9;
+            --neutral-500: #6B7280;
+            --neutral-900: #111827;
+            --border: #E5E7EB;
+            --white: #ffffff;
+            --verified-bg: #dcfce7;
+            --verified-text: #15803d;
+            --shadow-card: 0 1px 4px rgba(26,23,20,0.08), 0 2px 12px rgba(26,23,20,0.06);
+            --shadow-raised: 0 4px 16px rgba(26,23,20,0.10);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            font-family: 'Poppins', sans-serif; 
+            background-color: var(--neutral-100); 
+            color: var(--neutral-900); 
+            /* Strict Figma Width */
+            width: 1440px; 
+            margin: 0 auto; 
+            min-height: 100vh;
+        }
+
+        /* --- Sidebar Toggle Logic (Pure CSS) --- */
+        #sidebar-toggle { display: none; }
+
+        /* --- Header --- */
+        header {
+            height: 72px;
+            background: var(--white);
+            padding: 0 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-left { display: flex; align-items: center; gap: 20px; }
+        
+        .hamburger {
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            transition: background 0.2s;
+        }
+        .hamburger:hover { background: var(--neutral-100); }
+        .hamburger span { width: 22px; height: 2px; background: var(--neutral-900); border-radius: 2px; }
+
+        .logo {
+            display: flex; align-items: center; gap: 10px;
+            color: var(--primary-500); text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 32px; height: 32px; background: var(--primary-500);
+            border-radius: 8px; display: flex; align-items: center; justify-content: center;
+        }
+
+        .logo-text { font-size: 22px; font-weight: 700; letter-spacing: -0.5px; }
+
+        .user-profile {
+            display: flex; align-items: center; gap: 12px;
+        }
+
+        .user-info { text-align: right; }
+        .user-name { font-size: 14px; font-weight: 700; display: block; }
+        .user-role { font-size: 11px; color: var(--neutral-500); }
+        .user-avatar { 
+            width: 40px; height: 40px; border-radius: 50%; background: var(--accent-500);
+            color: white; display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: 16px;
+        }
+
+        /* --- Layout --- */
+        .container { display: flex; min-height: calc(100vh - 72px); }
+
+        /* --- Sidebar --- */
+        aside {
+            width: 260px; background: var(--white);
+            border-right: 1px solid var(--border);
+            padding: 32px 16px; flex-shrink: 0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+        }
+        
+        /* Toggle Effect */
+        #sidebar-toggle:checked ~ .container aside {
+            width: 0;
+            padding: 32px 0;
+            opacity: 0;
+            transform: translateX(-260px);
+            border-right: none;
+        }
+
+        .nav-item {
+            display: flex; align-items: center; gap: 12px;
+            padding: 12px 16px; text-decoration: none;
+            color: var(--neutral-900); font-size: 14px; font-weight: 500;
+            border-radius: 8px; margin-bottom: 4px; transition: all 0.15s;
+        }
+
+        .nav-item.active {
+            background: var(--accent-100); color: var(--accent-500);
+            border-left: 4px solid var(--accent-500); padding-left: 12px;
+            font-weight: 600;
+        }
+
+        .nav-item:hover:not(.active) { background: #f3f4f6; }
+
+        /* --- Main Content --- */
+        main { flex: 1; padding: 40px 60px; }
+
+        .page-header {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 32px;
+        }
+
+        .page-title h1 { font-size: 24px; font-weight: 800; }
+        .page-title p { font-size: 14px; color: var(--neutral-500); margin-top: 4px; }
+
+        .btn-list {
+            background: var(--primary-500); color: white;
+            padding: 12px 24px; border-radius: 10px; border: none;
+            font-weight: 600; font-size: 14px; cursor: pointer;
+            box-shadow: 0 4px 12px rgba(26, 86, 219, 0.2);
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr);
+            gap: 20px; margin-bottom: 48px;
+        }
+
+        .stat-card {
+            background: var(--white); border: 1px solid var(--border);
+            padding: 24px; border-radius: 14px; box-shadow: var(--shadow-card);
+        }
+
+        .stat-val { font-size: 24px; font-weight: 800; color: var(--accent-500); display: block; }
+        .stat-label { font-size: 11px; color: var(--neutral-500); font-weight: 600; text-transform: uppercase; margin-top: 6px; letter-spacing: 0.5px; }
+
+        /* Section List */
+        .section-header { margin-bottom: 24px; }
+        .section-header h2 { font-size: 18px; font-weight: 700; }
+
+        .listing-card {
+            background: white; border: 1px solid var(--border);
+            border-radius: 16px; overflow: hidden; display: flex;
+            margin-bottom: 16px; box-shadow: var(--shadow-card);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .listing-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-raised); }
+
+        .listing-img { width: 220px; height: 160px; object-fit: cover; flex-shrink: 0; }
+
+        .listing-body { flex: 1; padding: 24px; display: flex; flex-direction: column; justify-content: center; }
+
+        .status-badge {
+            font-size: 10px; font-weight: 700; text-transform: uppercase;
+            padding: 4px 10px; border-radius: 6px; width: fit-content;
+            margin-bottom: 12px;
+        }
+
+        .status-active { background: var(--verified-bg); color: var(--verified-text); border: 1px solid #86efac; }
+        .status-negotiation { background: var(--accent-100); color: var(--accent-500); border: 1px solid #fcd34d; }
+
+        .listing-title { font-size: 18px; font-weight: 700; margin-bottom: 12px; }
+
+        .listing-stats { display: flex; gap: 32px; }
+        .l-stat { font-size: 13px; color: var(--neutral-500); }
+        .l-stat b { color: var(--neutral-900); font-weight: 600; }
+
+        .listing-actions {
+            padding: 24px; border-left: 1px solid var(--border);
+            display: flex; flex-direction: column; justify-content: center;
+            gap: 10px; width: 180px; background: #fafafa;
+        }
+
+        .btn-action {
+            width: 100%; padding: 10px; border-radius: 8px;
+            font-size: 12px; font-weight: 700; cursor: pointer;
+            transition: all 0.15s; text-align: center; border: 1px solid var(--border);
+            background: white; color: var(--neutral-900);
+        }
+
+        .btn-action:hover { background: #f9f9f9; border-color: var(--neutral-500); }
+
+        .btn-primary-action {
+            background: var(--primary-500); color: white; border: none;
+        }
+
+        .btn-primary-action:hover { background: #1e429f; opacity: 0.9; }
+
+    </style>
+</head>
+<body>
+
+    <!-- Hidden Toggle -->
+    <input type="checkbox" id="sidebar-toggle">
+
+    <header>
+        <div class="header-left">
+            <label for="sidebar-toggle" class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+            <a href="#" class="logo">
+                <div class="logo-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                </div>
+                <span class="logo-text">Susync</span>
+            </a>
+        </div>
+        <div class="user-profile">
+            <div class="user-info">
+                <span class="user-name">Maria Santos</span>
+                <span class="user-role">Seller Account</span>
+            </div>
+            <div class="user-avatar">M</div>
+        </div>
+    </header>
+
+    <div class="container">
+        <aside>
+            <a href="#" class="nav-item active">🏠 My Properties</a>
+            <a href="#" class="nav-item">📈 Sales Activity</a>
+            <a href="#" class="nav-item">💬 Inquiries (12)</a>
+            <a href="#" class="nav-item">📄 Documents</a>
+            <a href="#" class="nav-item">⚙️ Settings</a>
+        </aside>
+
+        <main>
+            <div class="page-header">
+                <div class="page-title">
+                    <h1>Property Management</h1>
+                    <p>Track your listings, views, and inquiries performance.</p>
+                </div>
+                <button class="btn-list">+ List New Property</button>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-val">₱10.2M</span>
+                    <span class="stat-label">Total Closed Sales</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-val">5</span>
+                    <span class="stat-label">Active Listings</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-val">12</span>
+                    <span class="stat-label">New Inquiries</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-val" style="color: var(--primary-500);">62%</span>
+                    <span class="stat-label">Inquiry Conversion</span>
+                </div>
+            </div>
+
+            <div class="section-header">
+                <h2>Your Properties</h2>
+            </div>
+
+            <div class="listing-card">
+                <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&q=80&w=400" alt="House" class="listing-img">
+                <div class="listing-body">
+                    <span class="status-badge status-active">Active</span>
+                    <h3 class="listing-title">Modern 4BR House in QC</h3>
+                    <div class="listing-stats">
+                        <div class="l-stat">Views: <b>1,240</b></div>
+                        <div class="l-stat">Inquiries: <b>8</b></div>
+                        <div class="l-stat">Days Listed: <b>12</b></div>
+                    </div>
+                </div>
+                <div class="listing-actions">
+                    <button class="btn-action">Edit Listing</button>
+                    <button class="btn-action">View Analytics</button>
+                </div>
+            </div>
+
+            <div class="listing-card">
+                <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&q=80&w=400" alt="Condo" class="listing-img">
+                <div class="listing-body">
+                    <span class="status-badge status-negotiation">Negotiation</span>
+                    <h3 class="listing-title">2BR Condo in BGC</h3>
+                    <div class="listing-stats">
+                        <div class="l-stat">Views: <b>4,890</b></div>
+                        <div class="l-stat">Inquiries: <b>32</b></div>
+                        <div class="l-stat">Offers: <b>2</b></div>
+                    </div>
+                </div>
+                <div class="listing-actions">
+                    <button class="btn-action btn-primary-action">Review Offers</button>
+                    <button class="btn-action">Edit Listing</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+</body>
+</html>

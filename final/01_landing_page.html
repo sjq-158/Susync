@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Susync — Philippines' All-in-One Property Platform</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-500: #1A56DB;
+            --primary-100: #EBF2FF;
+            --accent-500: #92400E;
+            --neutral-100: #fbfbf9;
+            --neutral-500: #6B7280;
+            --neutral-900: #111827;
+            --border: #E5E7EB;
+            --white: #ffffff;
+            --verified-bg: #dcfce7;
+            --verified-text: #15803d;
+            --shadow-card: 0 1px 4px rgba(26,23,20,0.08), 0 2px 12px rgba(26,23,20,0.06);
+            --shadow-overlay: 0 12px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+        body { font-family: 'Poppins', sans-serif; background-color: var(--white); color: var(--neutral-900); overflow-x: hidden; }
+
+        .figma-container { width: 1440px; margin: 0 auto; background: white; position: relative; }
+
+        /* --- NAVBAR --- */
+        nav {
+            height: 72px;
+            padding: 0 80px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--white);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo { display: flex; align-items: center; gap: 8px; text-decoration: none; }
+        .logo-icon { width: 32px; height: 32px; background: var(--primary-500); border-radius: 8px; display: flex; align-items: center; justify-content: center; }
+        .logo-text { font-size: 22px; font-weight: 700; color: var(--primary-500); letter-spacing: -0.5px; }
+
+        .nav-auth { display: flex; gap: 12px; }
+        .btn-ghost { background: transparent; border: none; color: var(--neutral-900); font-weight: 600; padding: 8px 20px; cursor: pointer; }
+        .btn-primary-sm { background: var(--primary-500); color: white; border: none; border-radius: 8px; font-weight: 600; padding: 10px 24px; cursor: pointer; }
+
+        /* --- HERO --- */
+        .hero {
+            background-color: var(--primary-100);
+            padding: 80px 80px;
+            display: flex;
+            align-items: center;
+            gap: 60px;
+        }
+
+        .hero-content { flex: 1; }
+        .hero-tagline { color: var(--accent-500); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 16px; display: block; }
+        .hero-title { font-size: 52px; font-weight: 800; line-height: 1.1; margin-bottom: 24px; }
+        .hero-title span { color: var(--primary-500); }
+        .hero-desc { font-size: 18px; color: var(--neutral-500); max-width: 520px; margin-bottom: 32px; line-height: 1.6; }
+
+        .hero-btns { display: flex; gap: 16px; margin-bottom: 40px; }
+        .btn-main { padding: 16px 32px; border-radius: 12px; font-weight: 700; font-size: 16px; text-decoration: none; border: 1px solid var(--border); display: flex; align-items: center; transition: all 0.2s; }
+        .btn-primary { background: var(--primary-500); color: white; border: none; }
+        .btn-outline { background: white; color: var(--neutral-900); }
+
+        .hero-trust { display: flex; gap: 16px; }
+        .trust-badge { background: white; padding: 14px 24px; border-radius: 12px; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; box-shadow: var(--shadow-card); min-width: 180px; }
+
+        .hero-visual { flex: 1; position: relative; }
+        .hero-img { width: 100%; border-radius: 24px; box-shadow: var(--shadow-overlay); display: block; }
+        
+        .online-status { 
+            position: absolute; 
+            top: 24px; 
+            right: 24px; 
+            background: white; 
+            padding: 8px 16px; 
+            border-radius: 12px; 
+            display: flex; 
+            align-items: center; 
+            gap: 8px; 
+            font-size: 13px; 
+            font-weight: 700; 
+            box-shadow: var(--shadow-overlay); 
+        }
+        .dot { width: 10px; height: 10px; background: var(--verified-text); border-radius: 50%; }
+
+        .float-card { 
+            position: absolute; 
+            bottom: 30px; 
+            left: 30px; 
+            background: white; 
+            padding: 20px; 
+            border-radius: 20px; 
+            box-shadow: var(--shadow-overlay); 
+            width: 260px; 
+        }
+        .float-card h4 { font-size: 18px; font-weight: 800; color: var(--primary-500); margin-bottom: 6px; }
+        .float-card .property-name { font-size: 14px; font-weight: 600; margin-bottom: 10px; }
+        .verified-pill { display: flex; align-items: center; gap: 6px; color: var(--verified-text); font-size: 11px; font-weight: 700; background: var(--verified-bg); padding: 4px 10px; border-radius: 6px; width: fit-content; }
+
+        /* --- EXPLORE CURATED SPACES --- */
+        .gallery-section { padding: 60px 0; background: white; overflow: hidden; text-align: center; }
+        .gallery-header { margin-bottom: 40px; }
+        .vibrant-label { color: var(--accent-500); font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; }
+        .gallery-title { font-size: 42px; font-weight: 800; margin: 12px 0; color: #111827; }
+        .gallery-desc { color: var(--neutral-500); font-size: 17px; max-width: 800px; margin: 0 auto; line-height: 1.5; }
+
+        .image-track { display: flex; gap: 24px; width: max-content; animation: scroll 35s linear infinite; padding: 20px 0; }
+        @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(calc(-50% - 12px)); } }
+        
+        .anim-card { width: 400px; height: 260px; border-radius: 20px; overflow: hidden; position: relative; box-shadow: var(--shadow-card); flex-shrink: 0; }
+        .anim-card img { width: 100%; height: 100%; object-fit: cover; }
+        .anim-overlay { position: absolute; bottom: 0; left: 0; width: 100%; padding: 20px; background: linear-gradient(transparent, rgba(0,0,0,0.7)); color: white; text-align: left; }
+        .anim-title { font-size: 16px; font-weight: 700; }
+        .anim-loc { font-size: 12px; opacity: 0.8; }
+
+        /* --- WHY CHOOSE US --- */
+        .why-us { padding: 80px 80px; background: var(--white); text-align: center; }
+        .why-label { color: var(--accent-500); font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; }
+        .why-title { font-size: 38px; font-weight: 800; margin: 10px 0 50px; color: #111827; }
+        
+        .feature-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+        .feature-card { background: white; padding: 32px 24px; border-radius: 24px; border: 1px solid var(--border); text-align: left; transition: transform 0.3s; }
+        .feature-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-card); }
+        .icon-box { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 24px; font-size: 20px; }
+        .feature-card h3 { font-size: 16px; font-weight: 800; margin-bottom: 12px; color: #111827; }
+        .feature-card p { font-size: 13px; color: var(--neutral-500); line-height: 1.6; }
+
+        /* --- FOOTER --- */
+        footer { background: var(--neutral-900); padding: 60px 80px 40px; color: white; }
+        .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 60px; margin-bottom: 40px; }
+        .f-col h4 { font-size: 13px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 24px; color: white; }
+        .f-col a { display: block; color: var(--neutral-500); text-decoration: none; font-size: 14px; margin-bottom: 12px; }
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 32px; display: flex; justify-content: space-between; font-size: 11px; color: var(--neutral-500); }
+    </style>
+</head>
+<body>
+
+<div class="figma-container">
+    <!-- Navbar (No Links) -->
+    <nav>
+        <a href="#" class="logo">
+            <div class="logo-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+            </div>
+            <span class="logo-text">Susync</span>
+        </a>
+        <div class="nav-auth">
+            <button class="btn-ghost">Login</button>
+            <button class="btn-primary-sm">Get Started</button>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-content">
+            <span class="hero-tagline">Philippines' First All-in-One Property Platform</span>
+            <h1 class="hero-title">Find, Negotiate, and Close Property Deals — <span>Fully Online.</span></h1>
+            <p class="hero-desc">No middlemen. Verified listings. Digital contracts. Secure bank payments — all in one seamless platform.</p>
+            <div class="hero-btns">
+                <a href="#" class="btn-main btn-primary">Browse Properties →</a>
+                <a href="#" class="btn-main btn-outline">How It Works</a>
+            </div>
+            <div class="hero-trust">
+                <div class="trust-badge">Verified Listings</div>
+                <div class="trust-badge">10,000+ Properties</div>
+                <div class="trust-badge">4.9/5 Rating</div>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80" alt="House" class="hero-img">
+            <div class="online-status">
+                <div class="dot"></div> Owner Online
+            </div>
+            <div class="float-card">
+                <h4>4BR House in Cebu City</h4>
+                <div class="verified-pill">✓ Verified Listing</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vibrant Collections -->
+    <section class="gallery-section">
+        <div class="gallery-header">
+            <span class="vibrant-label">Vibrant Collections</span>
+            <h2 class="gallery-title">Explore Our Curated Spaces</h2>
+            <p class="gallery-desc">A glimpse into the diverse, verified properties waiting for you on the Susync platform.</p>
+        </div>
+        
+        <div class="image-track">
+            <div class="anim-card">
+                <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=600&q=80">
+                <div class="anim-overlay"><p class="anim-title">Cebu IT Park Condo</p><p class="anim-loc">Cebu City</p></div>
+            </div>
+            <div class="anim-card">
+                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80">
+                <div class="anim-overlay"><p class="anim-title">Modern Mandaue House</p><p class="anim-loc">Mandaue City</p></div>
+            </div>
+            <div class="anim-card">
+                <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=600&q=80">
+                <div class="anim-overlay"><p class="anim-title">Liloan Townhouse</p><p class="anim-loc">Liloan, Cebu</p></div>
+            </div>
+            <div class="anim-card">
+                <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=600&q=80">
+                <div class="anim-overlay"><p class="anim-title">Busay Luxury Lot</p><p class="anim-loc">Cebu City</p></div>
+            </div>
+            <!-- Duplicates for scroll -->
+            <div class="anim-card">
+                <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=600&q=80">
+                <div class="anim-overlay"><p class="anim-title">Cebu IT Park Condo</p><p class="anim-loc">Cebu City</p></div>
+            </div>
+            <div class="anim-card">
+                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80">
+                <div class="anim-overlay"><p class="anim-title">Modern Mandaue House</p><p class="anim-loc">Mandaue City</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="why-us">
+        <span class="why-label">WHY CHOOSE US</span>
+        <h2 class="why-title">The Smarter Way to Property</h2>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="icon-box" style="background: #EBF2FF;">📱</div>
+                <h3>All-Digital Flow</h3>
+                <p>From viewing to contracting and payment, handle the entire deal on your phone.</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon-box" style="background: #DCFCE7;">🛡️</div>
+                <h3>Anti-Scam Check</h3>
+                <p>Rigorous verification process for every listing to ensure title authenticity and safety.</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon-box" style="background: #FEF3C7;">🤝</div>
+                <h3>Zero Middlemen</h3>
+                <p>Communicate directly with verified owners and save on unnecessary hidden costs.</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon-box" style="background: #FEE2E2;">📍</div>
+                <h3>Smart Insights</h3>
+                <p>Access neighborhood data, price history, and market trends for every neighborhood.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="f-brand">
+                <a href="#" class="logo">
+                    <div class="logo-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg></div>
+                    <span class="logo-text" style="color: white;">Susync</span>
+                </a>
+                <p style="color: var(--neutral-500); margin-top: 16px; font-size: 14px;">Philippines' first all-in-one digital real estate platform. No middlemen, no paperwork.</p>
+            </div>
+            <div class="f-col">
+                <h4>Product</h4>
+                <a href="#">Browse Properties</a>
+                <a href="#">How It Works</a>
+                <a href="#">Virtual Tours</a>
+            </div>
+            <div class="f-col">
+                <h4>Company</h4>
+                <a href="#">About Us</a>
+                <a href="#">Careers</a>
+                <a href="#">Contact Us</a>
+            </div>
+            <div class="f-col">
+                <h4>Support</h4>
+                <a href="#">Help Center</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>© 2025 Susync Inc. All rights reserved. Licensed by HLURB.</span>
+            <span>DICT Compliant · 256-bit SSL Encrypted</span>
+        </div>
+    </footer>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Susync — My Transactions</title>
+    <!-- Poppins Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Susync Brand Tokens extracted from provided CSS */
+            --primary-500: #1A56DB;
+            --primary-100: #EBF2FF;
+            --accent-500: #92400E;
+            --accent-100: #FEF3C7;
+            --neutral-100: #fbfbf9;
+            --neutral-500: #6B7280;
+            --neutral-900: #111827;
+            --border: #E5E7EB;
+            --white: #ffffff;
+            --verified-bg: #dcfce7;
+            --verified-text: #15803d;
+            
+            /* Shadows */
+            --shadow-card: 0 1px 4px rgba(26,23,20,0.08), 0 2px 12px rgba(26,23,20,0.06);
+            --shadow-raised: 0 4px 16px rgba(26,23,20,0.10);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+
+        body { 
+            font-family: 'Poppins', sans-serif; 
+            background-color: var(--neutral-100); 
+            color: var(--neutral-900); 
+            /* Strict Figma Width */
+            width: 1440px; 
+            margin: 0 auto; 
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* --- Sidebar Logic (Pure CSS) --- */
+        #sidebar-toggle { display: none; }
+
+        /* --- Header --- */
+        header {
+            height: 72px;
+            background: var(--white);
+            padding: 0 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-left { display: flex; align-items: center; gap: 20px; }
+        
+        .hamburger {
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            transition: background 0.2s;
+        }
+        .hamburger:hover { background: var(--neutral-100); }
+        .hamburger span { width: 22px; height: 2px; background: var(--neutral-900); border-radius: 2px; }
+
+        .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--primary-500); }
+        .logo-box { 
+            width: 32px; height: 32px; 
+            background: var(--primary-500); 
+            border-radius: 8px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+        }
+        .logo-text { font-size: 22px; font-weight: 700; letter-spacing: -0.5px; }
+
+        .user-nav { display: flex; align-items: center; gap: 12px; }
+        .avatar { 
+            width: 38px; height: 38px; 
+            border-radius: 50%; 
+            background: var(--primary-500); 
+            color: white; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-weight: 700; 
+        }
+
+        /* --- Layout --- */
+        .container { display: flex; }
+
+        /* --- Sidebar --- */
+        aside { 
+            width: 260px; 
+            background: var(--white); 
+            border-right: 1px solid var(--border); 
+            padding: 24px 16px; 
+            flex-shrink: 0; 
+            min-height: calc(100vh - 72px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+        }
+        
+        /* Toggle Effect */
+        #sidebar-toggle:checked ~ .container aside {
+            width: 0;
+            padding: 24px 0;
+            opacity: 0;
+            transform: translateX(-260px);
+        }
+
+        .side-link { 
+            display: flex; 
+            align-items: center; 
+            gap: 12px; 
+            padding: 12px 16px; 
+            text-decoration: none; 
+            color: var(--neutral-900); 
+            font-size: 14px; 
+            font-weight: 500; 
+            border-radius: 8px; 
+            margin-bottom: 4px;
+            white-space: nowrap;
+        }
+        .side-link.active { 
+            background: var(--primary-100); 
+            color: var(--primary-500); 
+            border-left: 4px solid var(--primary-500); 
+            padding-left: 12px; 
+        }
+        .side-link:hover:not(.active) { background: var(--neutral-100); }
+
+        /* --- Main Content --- */
+        main { flex: 1; padding: 40px 60px; transition: all 0.3s ease; }
+
+        .page-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 32px; }
+        .page-header h1 { font-size: 28px; font-weight: 800; letter-spacing: -0.5px; }
+        .page-header p { font-size: 14px; color: var(--neutral-500); margin-top: 4px; }
+
+        /* Filter Tabs */
+        .filter-tabs { display: flex; gap: 8px; margin-bottom: 32px; border-bottom: 1px solid var(--border); padding-bottom: 16px; }
+        .filter-btn { 
+            padding: 8px 20px; 
+            border-radius: 10px; 
+            font-size: 13px; 
+            font-weight: 600; 
+            border: none; 
+            background: transparent; 
+            cursor: pointer; 
+            color: var(--neutral-500); 
+            transition: all 0.2s;
+        }
+        .filter-btn.active { background: var(--neutral-900); color: white; }
+        .filter-btn:hover:not(.active) { background: var(--border); color: var(--neutral-900); }
+
+        /* --- Transaction Cards --- */
+        .tx-list { display: flex; flex-direction: column; gap: 16px; }
+        
+        .tx-card { 
+            background: var(--white); 
+            border: 1px solid var(--border); 
+            border-radius: 16px; 
+            padding: 24px; 
+            display: flex; 
+            align-items: center; 
+            gap: 24px; 
+            box-shadow: var(--shadow-card); 
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-decoration: none;
+            color: inherit;
+        }
+        .tx-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-raised); }
+
+        .tx-img { width: 100px; height: 100px; border-radius: 12px; object-fit: cover; flex-shrink: 0; }
+        
+        .tx-main { flex: 1; min-width: 0; }
+        .tx-id { font-size: 11px; font-weight: 700; color: var(--neutral-500); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .tx-title { font-size: 17px; font-weight: 700; color: var(--neutral-900); margin-bottom: 4px; }
+        .tx-meta { font-size: 13px; color: var(--neutral-500); display: flex; align-items: center; gap: 16px; }
+
+        /* Progress Section */
+        .tx-progress-wrap { width: 280px; flex-shrink: 0; }
+        .step-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+        .step-pill { 
+            font-size: 11px; 
+            font-weight: 700; 
+            color: var(--accent-500); 
+            background: var(--accent-100); 
+            padding: 4px 12px; 
+            border-radius: 6px; 
+            text-transform: uppercase;
+        }
+        .step-percent { font-size: 12px; font-weight: 700; color: var(--neutral-900); }
+
+        .progress-rail { height: 8px; background: #E5E7EB; border-radius: 10px; overflow: hidden; }
+        .progress-fill { height: 100%; background: var(--primary-500); border-radius: 10px; transition: width 0.5s ease; }
+
+        /* Pricing & Action */
+        .tx-side-action { width: 140px; text-align: right; flex-shrink: 0; }
+        .tx-price { font-size: 20px; font-weight: 800; color: var(--primary-500); display: block; margin-bottom: 12px; }
+        .btn-view { 
+            display: inline-block; 
+            font-size: 12px; 
+            font-weight: 700; 
+            color: var(--primary-500); 
+            text-decoration: none; 
+            padding: 8px 16px; 
+            border: 1.5px solid var(--primary-500); 
+            border-radius: 10px; 
+            transition: all 0.2s; 
+        }
+        .btn-view:hover { background: var(--primary-500); color: white; }
+
+    </style>
+</head>
+<body>
+
+    <!-- Hidden Toggle -->
+    <input type="checkbox" id="sidebar-toggle">
+
+    <header>
+        <div class="header-left">
+            <label for="sidebar-toggle" class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+            <a href="#" class="logo">
+                <div class="logo-box">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                    </svg>
+                </div>
+                <span class="logo-text">Susync</span>
+            </a>
+        </div>
+        <div class="user-nav">
+            <div style="text-align: right; margin-right: 12px;">
+                <div style="font-size: 14px; font-weight: 700;">Juan dela Cruz</div>
+                <div style="font-size: 11px; color: var(--neutral-500); font-weight: 500;">Buyer Account</div>
+            </div>
+            <div class="avatar">J</div>
+        </div>
+    </header>
+
+    <div class="container">
+        <aside>
+            <a href="#" class="side-link">📊 &nbsp; Dashboard</a>
+            <a href="#" class="side-link active">🔄 &nbsp; My Transactions</a>
+            <a href="#" class="side-link">💬 &nbsp; Messages</a>
+            <a href="#" class="side-link">❤️ &nbsp; Saved Properties</a>
+            <a href="#" class="side-link">⚙️ &nbsp; Settings</a>
+            <div style="margin-top: 100px; padding-top: 24px; border-top: 1px solid var(--border);">
+                <a href="#" class="side-link" style="color: #ef4444;">🚪 &nbsp; Logout</a>
+            </div>
+        </aside>
+
+        <main>
+            <div class="page-header">
+                <div>
+                    <h1>My Transactions</h1>
+                    <p>Track the progress of your real-time property acquisitions.</p>
+                </div>
+                <div style="font-size: 14px; font-weight: 600; color: var(--neutral-500);">
+                    Active Deals: <span style="color: var(--primary-500);">2 Total</span>
+                </div>
+            </div>
+
+            <div class="filter-tabs">
+                <button class="filter-btn active">All Transactions</button>
+                <button class="filter-btn">In Progress</button>
+                <button class="filter-btn">Completed</button>
+                <button class="filter-btn">Cancelled</button>
+            </div>
+
+            <div class="tx-list">
+                
+                <!-- Transaction Item 1 -->
+                <a href="#" class="tx-card">
+                    <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=300" class="tx-img">
+                    <div class="tx-main">
+                        <div class="tx-id">SY-2025-04-0021</div>
+                        <h2 class="tx-title">Modern 4-Bedroom House, Quezon City</h2>
+                        <div class="tx-meta">
+                            <span>📍 Diliman, QC</span>
+                            <span>👤 Maria Santos (Seller)</span>
+                        </div>
+                    </div>
+                    <div class="tx-progress-wrap">
+                        <div class="step-header">
+                            <span class="step-pill">Step 3/5: Contract</span>
+                            <span class="step-percent">60%</span>
+                        </div>
+                        <div class="progress-rail">
+                            <div class="progress-fill" style="width: 60%;"></div>
+                        </div>
+                    </div>
+                    <div class="tx-side-action">
+                        <span class="tx-price">₱8,200,000</span>
+                        <span class="btn-view">View Tracker</span>
+                    </div>
+                </a>
+
+                <!-- Transaction Item 2 -->
+                <a href="#" class="tx-card">
+                    <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=300" class="tx-img">
+                    <div class="tx-main">
+                        <div class="tx-id">SY-2025-03-0942</div>
+                        <h2 class="tx-title">2BR Condo in BGC, Taguig</h2>
+                        <div class="tx-meta">
+                            <span>📍 BGC, Taguig</span>
+                            <span>👤 Carlos Reyes (Seller)</span>
+                        </div>
+                    </div>
+                    <div class="tx-progress-wrap">
+                        <div class="step-header">
+                            <span class="step-pill" style="background: var(--primary-100); color: var(--primary-500);">Step 2/5: Negotiation</span>
+                            <span class="step-percent">40%</span>
+                        </div>
+                        <div class="progress-rail">
+                            <div class="progress-fill" style="width: 40%;"></div>
+                        </div>
+                    </div>
+                    <div class="tx-side-action">
+                        <span class="tx-price">₱35,000/mo</span>
+                        <span class="btn-view">View Tracker</span>
+                    </div>
+                </a>
+
+                <!-- Completed Item -->
+                <div class="tx-card" style="opacity: 0.8; background: #fafafa;">
+                    <img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=300" class="tx-img">
+                    <div class="tx-main">
+                        <div class="tx-id">SY-2025-01-0210</div>
+                        <h2 class="tx-title">Studio Unit in Ortigas Center</h2>
+                        <div class="tx-meta">
+                            <span>📍 Pasig City</span>
+                            <span>👤 Jose Cruz (Seller)</span>
+                        </div>
+                    </div>
+                    <div class="tx-progress-wrap">
+                        <div class="step-header">
+                            <span class="step-pill" style="background: var(--verified-bg); color: var(--verified-text);">Step 5/5: Completed</span>
+                            <span class="step-percent">100%</span>
+                        </div>
+                        <div class="progress-rail">
+                            <div class="progress-fill" style="width: 100%; background: var(--verified-text);"></div>
+                        </div>
+                    </div>
+                    <div class="tx-side-action">
+                        <span class="tx-price">₱18,000/mo</span>
+                        <span class="btn-view" style="color: #666; border-color: #ccc;">View History</span>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+</body>
+</html>
