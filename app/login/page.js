@@ -9,14 +9,11 @@ export default function Page() {
     <>
       <style dangerouslySetInnerHTML={{ __html: css }} />
       <div className="susync-root">
-        {/* CRITICAL: The boundary must surround the component 
-            calling useSearchParams. 
+        {/* By using null or a fragment as a fallback, we ensure 
+            no extra HTML elements mess up your 'susync-root' layout 
+            while the component is loading.
         */}
-        <Suspense fallback={
-          <div className="flex h-screen items-center justify-center">
-            <p>Loading Secure Login...</p>
-          </div>
-        }>
+        <Suspense fallback={null}>
           <AuthLoginClient />
         </Suspense>
       </div>
