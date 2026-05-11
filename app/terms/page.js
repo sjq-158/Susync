@@ -1,5 +1,5 @@
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import Footer from "@/components/Footer"; // Ensure this path is correct
 import StaticHtmlPage from "@/components/StaticHtmlPage";
 
 export default function Page() {
