@@ -1,12 +1,12 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import StaticHtmlPage from "@/components/StaticHtmlPage";
+import LandingPage from "@/components/LandingPage";
 
 export default function Page() {
   return (
     <>
       <Navbar />
-      <StaticHtmlPage slug="01_landing_page" />
+      <LandingPage />
       <Footer />
     </>
   );

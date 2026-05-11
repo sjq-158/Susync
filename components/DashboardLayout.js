@@ -15,28 +15,22 @@ export default function DashboardLayout({ children, role = "buyer" }) {
           min-height: 100dvh;
           background: #f8fafc;
           font-family: "Poppins", sans-serif;
+          width: 100%;
+          overflow-x: hidden;
         }
 
         .dash-main {
           flex: 1;
           margin-left: 260px;
-          padding: 32px;
           min-width: 0;
           max-width: 100%;
+          overflow-x: hidden;
         }
 
         @media (max-width: 768px) {
           .dash-main {
             margin-left: 0;
-            padding: 16px;
-            padding-top: calc(60px + 16px);
-          }
-        }
-
-        @media (max-width: 480px) {
-          .dash-main {
-            padding: 12px;
-            padding-top: calc(60px + 12px);
+            padding-top: 60px;
           }
         }
       `}</style>

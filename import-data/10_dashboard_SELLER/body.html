@@ -1,102 +1,95 @@
-<!-- Hidden Toggle -->
-    <input type="checkbox" id="sidebar-toggle">
+<div class="page-header">
+  <div class="page-title">
+    <h1>Good morning, Maria</h1>
+    <p>Track your listings, views, and inquiries performance.</p>
+  </div>
+  <button class="btn-list">+ List New Property</button>
+</div>
 
-    <header>
-        <div class="header-left">
-            <label for="sidebar-toggle" class="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </label>
-            <a href="/seller/dashboard" class="logo">
-                <div class="logo-icon">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
-                </div>
-                <span class="logo-text">Susync</span>
-            </a>
-        </div>
-        <div class="user-profile">
-            <div class="user-info">
-                <span class="user-name">Maria Santos</span>
-                <span class="user-role">Seller Account</span>
-            </div>
-            <div class="user-avatar">M</div>
-        </div>
-    </header>
+<div class="stats-grid">
+  <div class="stat-card"><span class="stat-val">₱10.2M</span><span class="stat-label">Total Closed Sales</span></div>
+  <div class="stat-card"><span class="stat-val">5</span><span class="stat-label">Active Listings</span></div>
+  <div class="stat-card"><span class="stat-val">12</span><span class="stat-label">New Inquiries</span></div>
+  <div class="stat-card"><span class="stat-val" style="color: var(--verified-text)">62%</span><span class="stat-label">Inquiry Conversion</span></div>
+</div>
 
-    <div class="container">
-        <aside>
-            <a href="/seller/properties" class="nav-item active">🏠 My Properties</a>
-            <a href="/seller/sales" class="nav-item">📈 Sales Activity</a>
-            <a href="/seller/messages" class="nav-item">💬 Inquiries (12)</a>
-            <a href="/seller/documents" class="nav-item">📄 Documents</a>
-            <a href="/seller/settings" class="nav-item">⚙️ Settings</a>
-        </aside>
+<section>
+  <div class="section-header">
+    <h2>My Active Listings</h2>
+    <a href="/seller/properties">Manage all →</a>
+  </div>
 
-        <main>
-            <div class="page-header">
-                <div class="page-title">
-                    <h1>Property Management</h1>
-                    <p>Track your listings, views, and inquiries performance.</p>
-                </div>
-                <button class="btn-list">+ List New Property</button>
-            </div>
-
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <span class="stat-val">₱10.2M</span>
-                    <span class="stat-label">Total Closed Sales</span>
-                </div>
-                <div class="stat-card">
-                    <span class="stat-val">5</span>
-                    <span class="stat-label">Active Listings</span>
-                </div>
-                <div class="stat-card">
-                    <span class="stat-val">12</span>
-                    <span class="stat-label">New Inquiries</span>
-                </div>
-                <div class="stat-card">
-                    <span class="stat-val" style="color: var(--primary-500);">62%</span>
-                    <span class="stat-label">Inquiry Conversion</span>
-                </div>
-            </div>
-
-            <div class="section-header">
-                <h2>Your Properties</h2>
-            </div>
-
-            <div class="listing-card">
-                <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&q=80&w=400" alt="House" class="listing-img">
-                <div class="listing-body">
-                    <span class="status-badge status-active">Active</span>
-                    <h3 class="listing-title">Modern 4BR House in Cebu City</h3>
-                    <div class="listing-stats">
-                        <div class="l-stat">Views: <b>1,240</b></div>
-                        <div class="l-stat">Inquiries: <b>8</b></div>
-                        <div class="l-stat">Days Listed: <b>12</b></div>
-                    </div>
-                </div>
-                <div class="listing-actions">
-                    <button class="btn-action">Edit Listing</button>
-                    <button class="btn-action">View Analytics</button>
-                </div>
-            </div>
-
-            <div class="listing-card">
-                <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&q=80&w=400" alt="Condo" class="listing-img">
-                <div class="listing-body">
-                    <span class="status-badge status-negotiation">Negotiation</span>
-                    <h3 class="listing-title">2BR Condo in Cebu IT Park</h3>
-                    <div class="listing-stats">
-                        <div class="l-stat">Views: <b>4,890</b></div>
-                        <div class="l-stat">Inquiries: <b>32</b></div>
-                        <div class="l-stat">Offers: <b>2</b></div>
-                    </div>
-                </div>
-                <div class="listing-actions">
-                    <button class="btn-action btn-primary-action">Review Offers</button>
-                    <button class="btn-action">Edit Listing</button>
-                </div>
-            </div>
-        </main>
+  <div class="property-card">
+    <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=300" class="prop-img" alt="House">
+    <div class="prop-body">
+      <h4>Modern 4BR House, Cebu City</h4>
+      <div class="price">₱8,500,000</div>
+      <div class="prop-meta">142 views · 6 inquiries · Listed Apr 15</div>
     </div>
+    <div class="prop-actions">
+      <span class="status-pill status-active">Active</span>
+      <a href="/seller/properties" class="btn-edit">Edit Listing</a>
+    </div>
+  </div>
+
+  <div class="property-card">
+    <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=300" class="prop-img" alt="Condo">
+    <div class="prop-body">
+      <h4>2BR Condo in Cebu IT Park</h4>
+      <div class="price">₱35,000 / mo</div>
+      <div class="prop-meta">98 views · 12 inquiries · Listed Mar 28</div>
+    </div>
+    <div class="prop-actions">
+      <span class="status-pill status-pending">Pending</span>
+      <a href="/seller/properties" class="btn-edit">Edit Listing</a>
+    </div>
+  </div>
+
+  <div class="property-card">
+    <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=300" class="prop-img" alt="Lot">
+    <div class="prop-body">
+      <h4>Lot in Busay, Cebu City</h4>
+      <div class="price">₱4,200,000</div>
+      <div class="prop-meta">57 views · 3 inquiries · Listed Feb 10</div>
+    </div>
+    <div class="prop-actions">
+      <span class="status-pill status-active">Active</span>
+      <a href="/seller/properties" class="btn-edit">Edit Listing</a>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-header">
+    <h2>Recent Inquiries</h2>
+    <a href="/seller/messages">View all →</a>
+  </div>
+  <div class="inquiry-card">
+    <div class="inquiry-item">
+      <div class="inq-avatar">J</div>
+      <div class="inq-body">
+        <strong>Juan dela Cruz</strong>
+        <p>Is the 4BR house still available for viewing this weekend?</p>
+      </div>
+      <span class="inq-time">2 min ago</span>
+      <div class="unread-dot"></div>
+    </div>
+    <div class="inquiry-item">
+      <div class="inq-avatar" style="background: var(--accent-500);">A</div>
+      <div class="inq-body">
+        <strong>Ana Reyes</strong>
+        <p>Can we negotiate on the IT Park condo price?</p>
+      </div>
+      <span class="inq-time">1 hr ago</span>
+      <div class="unread-dot"></div>
+    </div>
+    <div class="inquiry-item">
+      <div class="inq-avatar" style="background: #0f766e;">R</div>
+      <div class="inq-body">
+        <strong>Roberto Lim</strong>
+        <p>Interested in the Busay lot. Please send title details.</p>
+      </div>
+      <span class="inq-time">4 hrs ago</span>
+    </div>
+  </div>
+</section>

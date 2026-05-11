@@ -24,38 +24,34 @@ export default function DashboardSidebar({ role = "buyer" }) {
   const [open, setOpen] = useState(false);
   const navItems = role === "seller" ? sellerNav : buyerNav;
 
-  useEffect(() => {
-    setOpen(false);
-  }, [pathname]);
+  useEffect(() => { setOpen(false); }, [pathname]);
 
   useEffect(() => {
-    if (open) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-    return () => {
-      document.body.style.overflow = "";
-    };
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
   }, [open]);
 
   return (
     <>
+      {/* Mobile top bar */}
       <header className="dash-topbar">
         <Link href="/" className="dash-logo">
           <span className="dash-logo-icon">🏠</span>
           <span className="dash-logo-text">Susync</span>
         </Link>
-        <button
-          className="hamburger"
-          onClick={() => setOpen(!open)}
-          aria-label="Toggle menu"
-          aria-expanded={open}
-        >
-          <span className={`ham-line ${open ? "open-1" : ""}`} />
-          <span className={`ham-line ${open ? "open-2" : ""}`} />
-          <span className={`ham-line ${open ? "open-3" : ""}`} />
-        </button>
+        <div className="dash-topbar-right">
+          <span className="dash-role-badge">{role === "seller" ? "Seller" : "Buyer"}</span>
+          <button
+            className="hamburger"
+            onClick={() => setOpen(!open)}
+            aria-label="Toggle menu"
+            aria-expanded={open}
+          >
+            <span className={`ham-line ${open ? "open-1" : ""}`} />
+            <span className={`ham-line ${open ? "open-2" : ""}`} />
+            <span className={`ham-line ${open ? "open-3" : ""}`} />
+          </button>
+        </div>
       </header>
 
       {open && (
@@ -68,13 +64,15 @@ export default function DashboardSidebar({ role = "buyer" }) {
 
       <aside className={`dashboard-sidebar ${open ? "sidebar-open" : ""}`}>
         <Link href="/" className="sidebar-logo">
-          <span className="dash-logo-icon">🏠</span>
-          <span className="dash-logo-text">Susync</span>
+          <span className="sidebar-logo-icon">🏠</span>
+          <span className="sidebar-logo-text">Susync</span>
         </Link>
+
+        <div className="sidebar-role">{role === "seller" ? "Seller Account" : "Buyer Account"}</div>
 
         <nav className="sidebar-nav">
           {navItems.map((item) => {
-            const active = pathname === item.href;
+            const active = pathname === item.href || pathname.startsWith(item.href + "/");
             return (
               <Link
                 key={item.href}
@@ -97,6 +95,7 @@ export default function DashboardSidebar({ role = "buyer" }) {
       </aside>
 
       <style jsx>{`
+        /* ── Mobile Topbar ── */
         .dash-topbar {
           display: none;
           position: fixed;
@@ -109,8 +108,8 @@ export default function DashboardSidebar({ role = "buyer" }) {
           align-items: center;
           justify-content: space-between;
           padding: 0 20px;
-          z-index: 100;
-          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+          z-index: 200;
+          box-shadow: 0 1px 3px rgba(0,0,0,0.05);
         }
 
         .dash-logo {
@@ -126,17 +125,27 @@ export default function DashboardSidebar({ role = "buyer" }) {
 
         .dash-logo-icon {
           font-size: 1rem;
-          background: #2563eb;
+          background: #1A56DB;
           border-radius: 8px;
           padding: 4px 6px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
         }
 
-        .dash-logo-text {
-          font-weight: 700;
-          color: #1e293b;
+        .dash-logo-text { font-weight: 700; color: #1e293b; }
+
+        .dash-topbar-right {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+        }
+
+        .dash-role-badge {
+          font-size: 11px;
+          font-weight: 600;
+          color: #1A56DB;
+          background: #EBF2FF;
+          padding: 3px 10px;
+          border-radius: 20px;
+          font-family: "Poppins", sans-serif;
         }
 
         .hamburger {
@@ -154,12 +163,10 @@ export default function DashboardSidebar({ role = "buyer" }) {
           height: 36px;
         }
 
-        .hamburger:hover {
-          background: #f1f5f9;
-        }
+        .hamburger:hover { background: #f1f5f9; }
 
         .hamburger:focus-visible {
-          outline: 2px solid #2563eb;
+          outline: 2px solid #1A56DB;
           outline-offset: 2px;
         }
 
@@ -169,43 +176,32 @@ export default function DashboardSidebar({ role = "buyer" }) {
           height: 2px;
           background: #1e293b;
           border-radius: 2px;
-          transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1),
-            opacity 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+          transition: transform 0.28s cubic-bezier(0.4,0,0.2,1),
+            opacity 0.28s cubic-bezier(0.4,0,0.2,1);
           transform-origin: center;
         }
 
-        .open-1 {
-          transform: translateY(7px) rotate(45deg);
-        }
+        .open-1 { transform: translateY(7px) rotate(45deg); }
+        .open-2 { opacity: 0; transform: scaleX(0); }
+        .open-3 { transform: translateY(-7px) rotate(-45deg); }
 
-        .open-2 {
-          opacity: 0;
-          transform: scaleX(0);
-        }
-
-        .open-3 {
-          transform: translateY(-7px) rotate(-45deg);
-        }
-
+        /* ── Overlay ── */
         .sidebar-overlay {
           position: fixed;
           inset: 0;
-          background: rgba(0, 0, 0, 0.45);
-          z-index: 149;
+          background: rgba(0,0,0,0.45);
+          z-index: 249;
           backdrop-filter: blur(2px);
           -webkit-backdrop-filter: blur(2px);
-          animation: fadeIn 0.2s ease;
+          animation: overlayFadeIn 0.2s ease;
         }
 
-        @keyframes fadeIn {
-          from {
-            opacity: 0;
-          }
-          to {
-            opacity: 1;
-          }
+        @keyframes overlayFadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
         }
 
+        /* ── Sidebar ── */
         .dashboard-sidebar {
           position: fixed;
           top: 0;
@@ -217,24 +213,50 @@ export default function DashboardSidebar({ role = "buyer" }) {
           border-right: 1px solid #e2e8f0;
           display: flex;
           flex-direction: column;
-          padding: 24px 16px;
-          z-index: 150;
+          padding: 28px 16px 24px;
+          z-index: 250;
           overflow-y: auto;
           overflow-x: hidden;
+          box-shadow: none;
         }
 
+        /* Desktop logo inside sidebar */
         .sidebar-logo {
           display: flex;
           align-items: center;
           gap: 8px;
           text-decoration: none;
           font-weight: 700;
-          font-size: 1.1rem;
-          color: #1e293b;
-          margin-bottom: 32px;
+          font-size: 1.15rem;
+          color: #111827;
+          margin-bottom: 4px;
           padding-left: 4px;
           font-family: "Poppins", sans-serif;
           flex-shrink: 0;
+        }
+
+        .sidebar-logo-icon {
+          background: #1A56DB;
+          border-radius: 8px;
+          padding: 4px 6px;
+          font-size: 1rem;
+        }
+
+        .sidebar-logo-text {
+          font-weight: 700;
+          color: #1A56DB;
+          letter-spacing: -0.3px;
+        }
+
+        .sidebar-role {
+          font-size: 11px;
+          font-weight: 600;
+          color: #6B7280;
+          padding-left: 8px;
+          margin-bottom: 28px;
+          font-family: "Poppins", sans-serif;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
         }
 
         .sidebar-nav {
@@ -251,9 +273,9 @@ export default function DashboardSidebar({ role = "buyer" }) {
           padding: 11px 14px;
           border-radius: 10px;
           text-decoration: none;
-          font-size: 0.92rem;
+          font-size: 0.9rem;
           font-weight: 500;
-          color: #64748b;
+          color: #475569;
           transition: background 0.15s ease, color 0.15s ease;
           font-family: "Poppins", sans-serif;
           border-left: 3px solid transparent;
@@ -265,9 +287,9 @@ export default function DashboardSidebar({ role = "buyer" }) {
         }
 
         .sidebar-link-active {
-          background: #eff6ff;
-          color: #2563eb;
-          border-left: 3px solid #2563eb;
+          background: #EBF2FF;
+          color: #1A56DB;
+          border-left: 3px solid #1A56DB;
           padding-left: 11px;
           font-weight: 600;
         }
@@ -286,42 +308,28 @@ export default function DashboardSidebar({ role = "buyer" }) {
           flex-shrink: 0;
         }
 
-        .sidebar-logout {
-          color: #ef4444;
-        }
+        .sidebar-logout { color: #ef4444; }
+        .sidebar-logout:hover { background: #fff1f2; color: #dc2626; }
 
-        .sidebar-logout:hover {
-          background: #fff1f2;
-          color: #dc2626;
-        }
-
+        /* ── Responsive ── */
         @media (max-width: 768px) {
-          .dash-topbar {
-            display: flex;
-          }
-
-          .sidebar-logo {
-            display: none;
-          }
+          .dash-topbar { display: flex; }
 
           .dashboard-sidebar {
             transform: translateX(-100%);
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-              box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            padding-top: 24px;
-            box-shadow: none;
+            transition: transform 0.3s cubic-bezier(0.4,0,0.2,1),
+              box-shadow 0.3s cubic-bezier(0.4,0,0.2,1);
+            padding-top: 28px;
           }
 
           .sidebar-open {
             transform: translateX(0);
-            box-shadow: 8px 0 32px rgba(0, 0, 0, 0.15);
+            box-shadow: 8px 0 32px rgba(0,0,0,0.15);
           }
         }
 
         @media (min-width: 769px) {
-          .sidebar-overlay {
-            display: none !important;
-          }
+          .sidebar-overlay { display: none !important; }
         }
       `}</style>
     </>
