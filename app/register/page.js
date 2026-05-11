@@ -6,7 +6,7 @@ export default function Page() {
   return (
     <>
       <Navbar />
-      <StaticHtmlPage slug="01_landing_page" />
+      <StaticHtmlPage slug="03_register_SEE" />
       <Footer />
     </>
   );
