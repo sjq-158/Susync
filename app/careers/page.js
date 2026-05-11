@@ -1,5 +1,13 @@
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import StaticHtmlPage from "@/components/StaticHtmlPage";
 
 export default function Page() {
-  return <StaticHtmlPage slug="03_careers" />;
+  return (
+    <>
+      <Navbar />
+      <StaticHtmlPage slug="03_careers" />
+      <Footer />
+    </>
+  );
 }
