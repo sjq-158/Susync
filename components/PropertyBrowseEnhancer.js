@@ -30,6 +30,17 @@ export default function PropertyBrowseEnhancer() {
         det.addEventListener("click", h);
         cleanups.push(() => det.removeEventListener("click", h));
       }
+
+      const saveBtn = card.querySelector(".btn-save");
+      if (saveBtn) {
+        const s = (e) => {
+          e.stopPropagation();
+          alert("Property added to your wishlist!");
+          saveBtn.classList.toggle("active");
+        };
+        saveBtn.addEventListener("click", s);
+        cleanups.push(() => saveBtn.removeEventListener("click", s));
+      }
     });
 
     const searchInput = root.querySelector(".search-container input");
