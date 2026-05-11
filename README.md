@@ -13,6 +13,7 @@ npm run dev
 
 - **UI**: Preprocessed HTML/CSS lives under [`import-data/`](import-data/) (regenerate with `node scripts/extract-final.mjs` after editing files in `final/`).
 - **API**: `GET /api/properties`, `POST /api/contact` (and `GET /api/contact` for quick inspection).
+- **Vercel WASM**: `prebuild` copies `sql-wasm.wasm` into `public/` so `sql.js` can open the bundled SQLite file in serverless.
 
 ## SQLite: local vs Vercel (demo)
 
