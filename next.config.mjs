@@ -5,7 +5,7 @@ const nextConfig = {
       { protocol: "https", hostname: "images.unsplash.com", pathname: "/**" },
     ],
   },
-  serverExternalPackages: ["better-sqlite3"],
+  serverExternalPackages: ["better-sqlite3", "sql.js"],
 };
 
 export default nextConfig;
