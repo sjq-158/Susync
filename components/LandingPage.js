@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 export default function LandingPage() {
   return (
     <>
@@ -367,18 +369,22 @@ export default function LandingPage() {
         {/* ── HERO ── */}
         <section className="lp-hero">
           <div className="lp-hero-content">
-            <span className="lp-hero-tagline">Philippines' First All-in-One Property Platform</span>
-            <h1 className="lp-hero-title">
-              Find, Negotiate, and Close Property Deals —{" "}
-              <span>Fully Online.</span>
-            </h1>
-            <p className="lp-hero-desc">
-              No middlemen. Verified listings. Digital contracts. Secure bank payments — all in one seamless platform.
-            </p>
-            <div className="lp-hero-btns">
-              <a href="/buyer/properties" className="lp-btn lp-btn-primary">Browse Properties →</a>
-              <a href="/#how-it-works" className="lp-btn lp-btn-outline">How It Works</a>
-            </div>
+            <span className="lp-hero-tagline">Philippines&apos; First All-in-One Property Platform</span>
+              <h1 className="lp-hero-title">
+                Find, Negotiate, and Close Property Deals —{" "}
+                <span>Fully Online.</span>
+              </h1>
+              <p className="lp-hero-desc">
+                No middlemen. Verified listings. Digital contracts. Secure bank payments — all in one seamless platform.
+              </p>
+              <div className="lp-hero-btns">
+                <Link href="/buyer/properties" className="lp-btn lp-btn-primary">
+                  Browse Properties →
+                </Link>
+                <Link href="/#how-it-works" className="lp-btn lp-btn-outline">
+                  How It Works
+                </Link>
+              </div>
             <div className="lp-hero-trust">
               <div className="lp-trust-badge">Verified Listings</div>
               <div className="lp-trust-badge">10,000+ Properties</div>
