@@ -40,19 +40,19 @@ export default async function Page({ params }) {
           <div className="property-card">
             <div className="card-image-box">
               <img src={p.image_url} alt={p.title} />
-              <span className="badge-verified">✓ Verified</span>
+              <span className="badge-verified"><span className="material-icons" style={{ fontSize: 14, verticalAlign: "middle" }}>check</span> Verified</span>
             </div>
             <div className="card-body">
               <p className="card-price">{priceLabel}</p>
               <h4 className="card-title">{p.title}</h4>
               <p className="card-loc">
-                📍 {p.barangay}, {p.city}
+                <span className="material-icons" style={{ fontSize: 14, verticalAlign: "middle" }}>location_on</span> {p.barangay}, {p.city}
               </p>
               <p style={{ fontSize: 13, color: "var(--neutral-500)", lineHeight: 1.6, marginTop: 12 }}>{p.description}</p>
               <div className="card-specs">
-                <span className="spec">🛏️ {p.beds} Beds</span>
-                <span className="spec">🚿 {p.baths} Baths</span>
-                <span className="spec">📏 {p.floor_area_sqm} m²</span>
+                <span className="spec"><span className="material-icons" style={{ fontSize: 14, verticalAlign: "middle" }}>bed</span> {p.beds} Beds</span>
+                <span className="spec"><span className="material-icons" style={{ fontSize: 14, verticalAlign: "middle" }}>bathtub</span> {p.baths} Baths</span>
+                <span className="spec"><span className="material-icons" style={{ fontSize: 14, verticalAlign: "middle" }}>square_foot</span> {p.floor_area_sqm} m²</span>
               </div>
               <div className="card-footer">
                 <div className="seller">

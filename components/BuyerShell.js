@@ -4,11 +4,11 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const NAV = [
-  { href: "/buyer/dashboard", icon: "📊", label: "Dashboard" },
-  { href: "/buyer/transactions?tab=all", match: "/buyer/transactions", icon: "🔄", label: "My Transactions" },
-  { href: "/buyer/messages", icon: "💬", label: "Messages" },
-  { href: "/buyer/saved", icon: "❤️", label: "Bookmark" },
-  { href: "/buyer/settings", icon: "⚙️", label: "Settings" },
+  { href: "/buyer/dashboard", icon: "dashboard", label: "Dashboard" },
+  { href: "/buyer/transactions?tab=all", match: "/buyer/transactions", icon: "sync_alt", label: "My Transactions" },
+  { href: "/buyer/messages", icon: "chat_bubble", label: "Messages" },
+  { href: "/buyer/saved", icon: "favorite", label: "Bookmark" },
+  { href: "/buyer/settings", icon: "settings", label: "Settings" },
 ];
 
 export default function BuyerShell({ children }) {
@@ -56,14 +56,14 @@ export default function BuyerShell({ children }) {
                 href={item.href}
                 className={`bshell-side-item${active ? " is-active" : ""}`}
               >
-                <span className="bshell-side-icon">{item.icon}</span>
+                <span className="bshell-side-icon material-icons">{item.icon}</span>
                 <span>{item.label}</span>
               </Link>
             );
           })}
           <div className="bshell-divider"></div>
           <Link href="/" className="bshell-side-item bshell-logout">
-            <span className="bshell-side-icon">🚪</span>
+            <span className="bshell-side-icon material-icons">logout</span>
             <span>Logout</span>
           </Link>
         </div>
@@ -171,7 +171,7 @@ const SHELL_CSS = `
     border-left: 4px solid #1A56DB;
     padding-left: 12px;
   }
-  .bshell-side-icon { width: 20px; display: inline-flex; justify-content: center; }
+  .bshell-side-icon { width: 20px; display: inline-flex; justify-content: center; font-size: 20px; }
 
   .bshell-divider {
     margin: 8px 16px;
