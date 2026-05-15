@@ -5,7 +5,7 @@ import { Suspense } from "react";
 export default function Page() {
   return (
     <>
-      <StaticHtmlPage slug="view_properties_BUYER" />
+      <StaticHtmlPage slug="view_properties_BUYER" noRoot />
       <Suspense fallback={null}>
         <PropertyBrowseEnhancer />
       </Suspense>

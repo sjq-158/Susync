@@ -5,7 +5,7 @@ import { Suspense } from "react";
 function Content({ slug }) {
   return (
     <>
-      <StaticHtmlPage slug={slug} />
+      <StaticHtmlPage slug={slug} noRoot />
       <Suspense fallback={null}>
         <TransactionTabsEnhancer />
       </Suspense>

@@ -1,5 +1,5 @@
 import StaticHtmlPage from "@/components/StaticHtmlPage";
 
 export default function Page() {
-  return <StaticHtmlPage slug="settings_BUYER" />;
+  return <StaticHtmlPage slug="settings_BUYER" noRoot />;
 }

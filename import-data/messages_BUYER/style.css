@@ -19,12 +19,12 @@
             font-family: 'Poppins', sans-serif; 
             background-color: var(--white); 
             color: var(--neutral-900); 
-            width: 100%; max-width: 1440px; 
-            margin: 0 auto; 
-            height: 100vh;
+            width: 100%; max-width: 1440px;
+            margin: 0 auto;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            overflow: hidden;
+            overflow-x: hidden;
         }
 
         /* --- Sidebar Toggle Logic --- */
