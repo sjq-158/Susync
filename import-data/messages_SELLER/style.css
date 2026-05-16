@@ -187,7 +187,7 @@
         .chat-user-meta h3 { font-size: 16px; font-weight: 700; }
         .chat-user-meta p { font-size: 12px; color: #15803d; font-weight: 600; }
 
-        .chat-.susync-root {
+        .chat-body {
             flex: 1;
             padding: 24px;
             overflow-y: auto;

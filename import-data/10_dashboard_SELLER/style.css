@@ -166,7 +166,7 @@
 
         .listing-img { width: 220px; height: 160px; object-fit: cover; flex-shrink: 0; }
 
-        .listing-.susync-root { flex: 1; padding: 24px; display: flex; flex-direction: column; justify-content: center; }
+        .listing-body { flex: 1; padding: 24px; display: flex; flex-direction: column; justify-content: center; }
 
         .status-badge {
             font-size: 10px; font-weight: 700; text-transform: uppercase;
