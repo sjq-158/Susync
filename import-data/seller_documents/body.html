@@ -10,7 +10,7 @@
                 <div class="section-card">
                     <div class="section-title">
                         Your Files
-                        <a href="/seller/properties" style="font-size: 12px; color: var(--primary-500); text-decoration: none;">Manage Listings</a>
+                        <a href="#manage-listings-modal" class="manage-listings-btn">Manage Listings</a>
                     </div>
                     <table class="activity-table">
                         <thead>
@@ -42,6 +42,39 @@
                             </tr>
                         </tbody>
                     </table>
+                </div>
+            </div>
+
+            <div id="manage-listings-modal" class="modal-overlay">
+                <div class="modal">
+                    <div class="modal-header">
+                        <h2>Manage Listings</h2>
+                        <a href="#" class="modal-close" aria-label="Close">&times;</a>
+                    </div>
+                    <p class="modal-desc">Quick actions for managing documents tied to your listings.</p>
+                    <div class="modal-actions">
+                        <a href="/seller/properties" class="modal-action">
+                            <span class="modal-action-icon">&#8962;</span>
+                            <span class="modal-action-text">
+                                <span>Go to My Properties</span>
+                                <span class="modal-action-sub">View and edit all your active listings</span>
+                            </span>
+                        </a>
+                        <a href="/seller/properties" class="modal-action">
+                            <span class="modal-action-icon">&#43;</span>
+                            <span class="modal-action-text">
+                                <span>Upload New Document</span>
+                                <span class="modal-action-sub">Attach a title, disclosure, or contract</span>
+                            </span>
+                        </a>
+                        <a href="/seller/sales" class="modal-action">
+                            <span class="modal-action-icon">&#9998;</span>
+                            <span class="modal-action-text">
+                                <span>Review Pending Signatures</span>
+                                <span class="modal-action-sub">Track contracts awaiting buyer signatures</span>
+                            </span>
+                        </a>
+                    </div>
                 </div>
             </div>
         </main>
