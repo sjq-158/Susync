@@ -94,7 +94,7 @@
 
         .filter-tabs { display: flex; gap: 8px; margin-bottom: 32px; border-bottom: 1px solid var(--border); padding-bottom: 16px; }
         .filter-btn { padding: 8px 16px; border-radius: 8px; font-size: 13px; font-weight: 600; border: none; background: transparent; cursor: pointer; color: var(--neutral-500); }
-        .filter-btn.active { background: var(--neutral-900); color: white; }
+        .filter-btn.active { background: var(--primary-500); color: white; }
 
         /* --- Transaction List --- */
         .tx-list { display: flex; flex-direction: column; gap: 16px; }

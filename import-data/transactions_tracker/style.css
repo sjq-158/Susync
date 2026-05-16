@@ -148,7 +148,7 @@
             color: var(--neutral-500); 
             transition: all 0.2s;
         }
-        .filter-btn.active { background: var(--neutral-900); color: white; }
+        .filter-btn.active { background: var(--primary-500); color: white; }
         .filter-btn:hover:not(.active) { background: var(--border); color: var(--neutral-900); }
 
         /* --- Transaction Cards --- */

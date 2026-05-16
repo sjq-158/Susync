@@ -3,12 +3,13 @@
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 
-const ROUTES = [
-  { label: "All Transactions", href: "/buyer/transactions" },
-  { label: "In Progress", href: "/buyer/transactions?tab=in_progress" },
-  { label: "Completed", href: "/buyer/transactions?tab=completed" },
-  { label: "Cancelled", href: "/buyer/transactions?tab=cancelled" },
-];
+const ROUTES_BY_LABEL = {
+  "All Deals": "/buyer/transactions?tab=all",
+  "All Transactions": "/buyer/transactions?tab=all",
+  "In Progress": "/buyer/transactions?tab=in_progress",
+  Completed: "/buyer/transactions?tab=completed",
+  Cancelled: "/buyer/transactions?tab=cancelled",
+};
 
 export default function TransactionTabsEnhancer() {
   const router = useRouter();
@@ -17,26 +18,24 @@ export default function TransactionTabsEnhancer() {
 
   useEffect(() => {
     if (pathname !== "/buyer/transactions") return undefined;
-    const root = document.querySelector(".susync-root");
+    const root = document.querySelector(".susync-root, body");
     if (!root) return undefined;
-    const buttons = root.querySelectorAll(".filter-btn");
+    const buttons = document.querySelectorAll(".filter-btn");
     if (!buttons.length) return undefined;
 
     const tab = searchParams.get("tab");
-    const activeLabel =
+    const activeLabels =
       tab === "in_progress"
-        ? "In Progress"
+        ? ["In Progress"]
         : tab === "completed"
-          ? "Completed"
+          ? ["Completed"]
           : tab === "cancelled"
-            ? "Cancelled"
-            : tab === "all"
-              ? "All Transactions"
-              : "All Transactions";
+            ? ["Cancelled"]
+            : ["All Deals", "All Transactions"];
 
     buttons.forEach((btn) => {
       const t = btn.textContent?.trim() ?? "";
-      if (t === activeLabel || (activeLabel === "All Transactions" && t === "All Transactions" && !tab)) {
+      if (activeLabels.includes(t)) {
         btn.classList.add("active");
       } else {
         btn.classList.remove("active");
@@ -46,11 +45,11 @@ export default function TransactionTabsEnhancer() {
     const handlers = [];
     buttons.forEach((btn) => {
       const label = btn.textContent?.trim() ?? "";
-      const route = ROUTES.find((r) => r.label === label);
-      if (!route) return;
+      const href = ROUTES_BY_LABEL[label];
+      if (!href) return;
       const h = (e) => {
         e.preventDefault();
-        router.push(route.href);
+        router.push(href);
       };
       btn.addEventListener("click", h);
       handlers.push([btn, h]);
