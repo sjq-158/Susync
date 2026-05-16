@@ -1,5 +1,11 @@
 import StaticHtmlPage from "@/components/StaticHtmlPage";
+import SettingsEnhancer from "@/components/SettingsEnhancer";
 
 export default function Page() {
-  return <StaticHtmlPage slug="settings_BUYER" noRoot />;
+  return (
+    <>
+      <StaticHtmlPage slug="settings_BUYER" noRoot />
+      <SettingsEnhancer />
+    </>
+  );
 }
