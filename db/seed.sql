@@ -1,7 +1,8 @@
 INSERT OR REPLACE INTO users (id, email, display_name, role, phone, address_line) VALUES
 ('user-buyer-1', 'juan@example.com', 'Juan dela Cruz', 'buyer', '+63 917 000 1111', 'Cebu City, Cebu'),
 ('user-seller-1', 'maria.santos@email.com', 'Maria Santos', 'seller', '+63 917 888 1234', 'Mandaue City, Cebu'),
-('user-seller-2', 'carlos@example.com', 'Carlos Reyes', 'seller', '+63 917 222 3333', 'Cebu City, Cebu');
+('user-seller-2', 'carlos@example.com', 'Carlos Reyes', 'seller', '+63 917 222 3333', 'Cebu City, Cebu'),
+('user-seller-3', 'ana.lim@example.com', 'Ana Lim', 'seller', '+63 917 555 4444', 'Consolacion, Cebu');
 
 INSERT OR REPLACE INTO properties (
   id, seller_id, title, description, property_type, listing_kind, price,
@@ -29,14 +30,14 @@ INSERT OR REPLACE INTO properties (
 (
   'prop-2',
   'user-seller-2',
-  '2BR Condo with Skyline View',
+  'Stylish 2BR Condo in Cebu IT Park',
   'Corner unit with morning light and views toward Mactan.',
   'condo',
   'rent',
   35000,
   'Cardinal Rosales Ave',
   'Cebu IT Park',
-  'Cebu City',
+  'Mandaue City',
   'https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=800',
   2,
   2,
@@ -44,11 +45,31 @@ INSERT OR REPLACE INTO properties (
   1,
   'active',
   datetime('now')
+),
+(
+  'prop-3',
+  'user-seller-3',
+  'Cozy Townhouse in Consolacion',
+  'A charming 3-bedroom townhouse in a quiet, family-friendly subdivision in Consolacion, just 30 minutes north of Cebu City.',
+  'townhouse',
+  'sale',
+  5200000,
+  'Pitogo St',
+  'Pitogo',
+  'Consolacion',
+  'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800',
+  3,
+  2,
+  140,
+  1,
+  'active',
+  datetime('now')
 );
 
 INSERT OR REPLACE INTO saved_properties (user_id, property_id) VALUES
 ('user-buyer-1', 'prop-1'),
-('user-buyer-1', 'prop-2');
+('user-buyer-1', 'prop-2'),
+('user-buyer-1', 'prop-3');
 
 INSERT OR REPLACE INTO transactions (
   id, reference_code, buyer_id, seller_id, property_id, status,
