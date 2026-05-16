@@ -4,8 +4,20 @@
                     <h1>Sales Activity</h1>
                     <p>Overview of your property sales and transaction pipeline.</p>
                 </div>
-                <div class="date-filter">
-                    <span class="material-icons" style="font-size: 18px; vertical-align: middle;">calendar_today</span> Last 30 Days <small><span class="material-icons" style="font-size: 18px; vertical-align: middle;">expand_more</span></small>
+                <div class="date-filter-wrapper">
+                    <div class="date-filter" id="dateFilter" role="button" tabindex="0" aria-haspopup="listbox" aria-expanded="false">
+                        <span class="material-icons" style="font-size: 18px; vertical-align: middle;">calendar_today</span>
+                        <span id="dateFilterLabel">Last 30 Days</span>
+                        <span class="chevron"><span class="material-icons" style="font-size: 18px; vertical-align: middle;">expand_more</span></span>
+                    </div>
+                    <div class="date-menu" id="dateMenu" role="listbox">
+                        <div class="date-option" data-value="Today" role="option">Today <span class="material-icons check">check</span></div>
+                        <div class="date-option" data-value="Last 7 Days" role="option">Last 7 Days <span class="material-icons check">check</span></div>
+                        <div class="date-option selected" data-value="Last 30 Days" role="option">Last 30 Days <span class="material-icons check">check</span></div>
+                        <div class="date-option" data-value="Last 90 Days" role="option">Last 90 Days <span class="material-icons check">check</span></div>
+                        <div class="date-option" data-value="This Year" role="option">This Year <span class="material-icons check">check</span></div>
+                        <div class="date-option" data-value="All Time" role="option">All Time <span class="material-icons check">check</span></div>
+                    </div>
                 </div>
             </div>
 

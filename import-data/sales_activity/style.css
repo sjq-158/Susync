@@ -128,12 +128,36 @@
         .page-title h1 { font-size: 24px; font-weight: 800; }
         .page-title p { font-size: 14px; color: var(--neutral-500); margin-top: 4px; }
 
+        .date-filter-wrapper { position: relative; }
         .date-filter {
             background: var(--white); border: 1px solid var(--border);
             padding: 8px 16px; border-radius: 10px; font-size: 13px;
             font-weight: 600; color: var(--neutral-900); cursor: pointer;
             display: flex; align-items: center; gap: 8px;
+            user-select: none; transition: border-color 0.15s, box-shadow 0.15s;
         }
+        .date-filter:hover { border-color: var(--primary-500); }
+        .date-filter.open { border-color: var(--primary-500); box-shadow: 0 0 0 3px var(--primary-100); }
+        .date-filter .chevron { transition: transform 0.2s; display: inline-flex; }
+        .date-filter.open .chevron { transform: rotate(180deg); }
+
+        .date-menu {
+            position: absolute; top: calc(100% + 6px); right: 0;
+            background: var(--white); border: 1px solid var(--border);
+            border-radius: 10px; box-shadow: var(--shadow-raised);
+            min-width: 200px; padding: 6px; z-index: 50;
+            display: none;
+        }
+        .date-menu.open { display: block; }
+        .date-option {
+            padding: 10px 12px; font-size: 13px; font-weight: 500;
+            color: var(--neutral-900); border-radius: 6px; cursor: pointer;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .date-option:hover { background: var(--neutral-100); }
+        .date-option.selected { background: var(--primary-100); color: var(--primary-500); font-weight: 600; }
+        .date-option .check { font-size: 16px !important; visibility: hidden; }
+        .date-option.selected .check { visibility: visible; }
 
         /* Stats Grid */
         .stats-grid {
