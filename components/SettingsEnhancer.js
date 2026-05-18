@@ -8,6 +8,8 @@ export default function SettingsEnhancer() {
   const [modal, setModal] = useState(null); // null | "password" | "upload" | "delete"
   const [uploadCtx, setUploadCtx] = useState({ label: "", mode: "upload" });
   const fileInputRef = useRef(null);
+  const avatarInputRef = useRef(null);
+  const avatarElRef = useRef(null);
 
   // Password modal state
   const [pwForm, setPwForm] = useState({ current: "", next: "", confirm: "" });
@@ -73,6 +75,19 @@ export default function SettingsEnhancer() {
       btn.addEventListener("click", onClick);
       cleanups.push(() => btn.removeEventListener("click", onClick));
     });
+
+    // 4b. Wire profile avatar camera button.
+    const camBtn = scope.querySelector(".profile-avatar-wrap .cam-btn");
+    const avatarEl = scope.querySelector(".profile-avatar-wrap .profile-avatar");
+    if (camBtn && avatarEl) {
+      avatarElRef.current = avatarEl;
+      const onCamClick = (e) => {
+        e.preventDefault();
+        avatarInputRef.current?.click();
+      };
+      camBtn.addEventListener("click", onCamClick);
+      cleanups.push(() => camBtn.removeEventListener("click", onCamClick));
+    }
 
     // 5. Wire Delete Account button.
     scope.querySelectorAll(".btn-destructive").forEach((btn) => {
@@ -164,6 +179,33 @@ export default function SettingsEnhancer() {
         accept="image/*,.pdf,.doc,.docx"
         style={{ display: "none" }}
         onChange={onFilePicked}
+      />
+
+      <input
+        ref={avatarInputRef}
+        type="file"
+        accept="image/*"
+        style={{ display: "none" }}
+        onChange={(e) => {
+          const f = e.target.files?.[0];
+          if (!f) return;
+          if (!f.type.startsWith("image/")) {
+            alert("Please select an image file.");
+            e.target.value = "";
+            return;
+          }
+          const reader = new FileReader();
+          reader.onload = (ev) => {
+            const el = avatarElRef.current;
+            if (!el) return;
+            el.textContent = "";
+            el.style.backgroundImage = `url(${ev.target.result})`;
+            el.style.backgroundSize = "cover";
+            el.style.backgroundPosition = "center";
+          };
+          reader.readAsDataURL(f);
+          e.target.value = "";
+        }}
       />
 
       {modal === "password" && (
