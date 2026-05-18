@@ -25,7 +25,7 @@ export default function ContactSupportButton() {
               </div>
               <div>
                 <h3 className="cs-title">Contact Susync Support</h3>
-                <p className="cs-sub">We're here to help 24/7 with your transaction.</p>
+                <p className="cs-sub">We&apos;re here to help 24/7 with your transaction.</p>
               </div>
             </div>
 

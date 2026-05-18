@@ -176,7 +176,7 @@ export default function Page() {
         {listings.length === 0 ? (
           <div className="spm-empty">
             <span className="material-icons spm-empty-icon">home_work</span>
-            <p>You haven't listed any properties yet.</p>
+            <p>You haven&apos;t listed any properties yet.</p>
             <button className="spm-btn-primary" onClick={() => setListOpen(true)}>
               <span className="material-icons" style={{ fontSize: 18 }}>add</span> List Your First Property
             </button>
@@ -478,7 +478,7 @@ function OffersModal({ listing, onClose, onAccept }) {
                   </div>
                 </div>
               </div>
-              <p className="spm-offer-msg">"{o.message}"</p>
+              <p className="spm-offer-msg">&quot;{o.message}&quot;</p>
               <div className="spm-offer-actions">
                 <button className="spm-btn-secondary">Counter</button>
                 <button className="spm-btn-secondary">Decline</button>

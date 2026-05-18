@@ -286,12 +286,12 @@ export function PropertyCTAButtons({ listingKind, propertyTitle, priceLabel }) {
           <div className="pi-success">
             <span className="material-icons pi-success-icon">event_available</span>
             <h3 className="pi-title">Viewing requested</h3>
-            <p className="pi-sub">The seller has been notified. You'll receive a confirmation in Messages once they approve the schedule.</p>
+            <p className="pi-sub">The seller has been notified. You&apos;ll receive a confirmation in Messages once they approve the schedule.</p>
           </div>
         ) : (
           <form onSubmit={submitSchedule}>
             <h3 className="pi-title">Schedule a viewing</h3>
-            <p className="pi-sub">Pick a date and time to visit "{propertyTitle}".</p>
+            <p className="pi-sub">Pick a date and time to visit &quot;{propertyTitle}&quot;.</p>
 
             <div className="pi-grid-2">
               <div className="pi-field">

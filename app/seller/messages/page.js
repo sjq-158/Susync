@@ -180,7 +180,7 @@ export default function Page() {
           ))}
 
           {filtered.length === 0 && (
-            <div className="sm-empty-contacts">No conversations match "{search}".</div>
+            <div className="sm-empty-contacts">No conversations match &quot;{search}&quot;.</div>
           )}
         </div>
 
@@ -215,7 +215,7 @@ export default function Page() {
                       <div key={m.id} className="sm-counter-bubble">
                         <div className="sm-counter-label">Counter-Offer Sent</div>
                         <div className="sm-counter-price">₱{Number(m.amount).toLocaleString("en-PH")}</div>
-                        {m.message && <div className="sm-counter-note">"{m.message}"</div>}
+                        {m.message && <div className="sm-counter-note">&quot;{m.message}&quot;</div>}
                       </div>
                     );
                   }
@@ -374,7 +374,7 @@ function BuyerProfileModal({ contact, onClose }) {
 
         <div className="sm-profile-tip">
           <span className="material-icons" style={{ fontSize: 18, color: "#1A56DB" }}>info</span>
-          <span>All buyer information is verified by Susync's compliance team. Verified buyers complete transactions <strong>3x faster</strong>.</span>
+          <span>All buyer information is verified by Susync&apos;s compliance team. Verified buyers complete transactions <strong>3x faster</strong>.</span>
         </div>
 
         <div className="sm-actions">
@@ -393,7 +393,7 @@ function AcceptOfferModal({ contact, onClose, onConfirm }) {
 
         <div className="sm-success-icon"><span className="material-icons">handshake</span></div>
         <h2 className="sm-modal-title" style={{ textAlign: "center" }}>Accept this offer?</h2>
-        <p className="sm-modal-sub" style={{ textAlign: "center" }}>You're about to accept the buyer's offer. Once confirmed, Susync will move this transaction to the contracting stage.</p>
+        <p className="sm-modal-sub" style={{ textAlign: "center" }}>You&apos;re about to accept the buyer&apos;s offer. Once confirmed, Susync will move this transaction to the contracting stage.</p>
 
         <div className="sm-accept-box">
           <div className="sm-accept-row">
@@ -445,7 +445,7 @@ function CounterOfferModal({ contact, onClose, onSubmit }) {
 
         <div className="sm-counter-summary">
           <div><span>Listing price</span><strong>₱{list.toLocaleString("en-PH")}</strong></div>
-          {buyerOffer ? <div><span>Buyer's offer</span><strong>₱{buyerOffer.toLocaleString("en-PH")}</strong></div> : null}
+          {buyerOffer ? <div><span>Buyer&apos;s offer</span><strong>₱{buyerOffer.toLocaleString("en-PH")}</strong></div> : null}
         </div>
 
         <form onSubmit={submit}>
