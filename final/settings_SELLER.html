@@ -251,8 +251,9 @@
                 <div class="card">
                     <div class="profile-header">
                         <div class="profile-avatar-wrap">
-                            <div class="profile-avatar">M</div>
-                            <button class="cam-btn"><span class="material-icons" style="font-size: 18px; vertical-align: middle;">photo_camera</span></button>
+                            <div class="profile-avatar" id="profileAvatar">M</div>
+                            <button class="cam-btn" onclick="document.getElementById('avatarFileInput').click()"><span class="material-icons" style="font-size: 18px; vertical-align: middle;">photo_camera</span></button>
+                            <input type="file" id="avatarFileInput" accept="image/*" style="display:none" onchange="(function(e){var f=e.target.files[0];if(!f)return;if(!f.type.startsWith('image/')){alert('Please select an image file.');e.target.value='';return;}var r=new FileReader();r.onload=function(ev){var a=document.getElementById('profileAvatar');a.innerHTML='';a.style.backgroundImage='url('+ev.target.result+')';a.style.backgroundSize='cover';a.style.backgroundPosition='center';};r.readAsDataURL(f);})(event)">
                         </div>
                         <div class="profile-info" style="flex: 1;">
                             <h2>Maria Santos</h2>

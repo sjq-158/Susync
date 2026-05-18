@@ -103,7 +103,7 @@ export function PropertyActionRow({ title }) {
         ) : (
           <form onSubmit={submitReport}>
             <h3 className="pi-title">Report this listing</h3>
-            <p className="pi-sub">Help us keep Susync safe. Tell us what's wrong with "{title}".</p>
+            <p className="pi-sub">Help us keep Susync safe. Tell us what&apos;s wrong with &quot;{title}&quot;.</p>
 
             <div className="pi-field">
               <label className="pi-label">Reason</label>
