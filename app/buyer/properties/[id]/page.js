@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { dbAll } from "@/lib/sqlite";
+import { PropertyActionRow, PropertyGallery, PropertyCTAButtons } from "./PropertyInteractive";
 
 const GALLERY = {
   "prop-1": [
@@ -161,21 +162,10 @@ export default async function Page({ params }) {
         </div>
 
         <div className="pd-action-row">
-          <button className="pd-btn-icon pd-saved"><span className="material-icons" style={{ fontSize: 18 }}>favorite</span> Saved</button>
-          <button className="pd-btn-icon"><span className="material-icons" style={{ fontSize: 18 }}>share</span> Share</button>
-          <button className="pd-btn-icon"><span className="material-icons" style={{ fontSize: 18 }}>flag</span> Report</button>
+          <PropertyActionRow title={p.title} />
         </div>
 
-        <div className="pd-gallery">
-          <div className="pd-g-cell pd-g-main"><img src={photos[0]} alt="Main" /></div>
-          {photos.slice(1, 4).map((src, i) => (
-            <div key={i} className="pd-g-cell"><img src={src} alt={`Photo ${i + 2}`} /></div>
-          ))}
-          <div className="pd-g-cell">
-            <img src={photos[4] || photos[0]} alt="More" />
-            <div className="pd-more-overlay">+{Math.max(0, photos.length - 4) + 4} photos</div>
-          </div>
-        </div>
+        <PropertyGallery photos={photos} />
 
         <div className="pd-layout">
           <div>
@@ -261,13 +251,11 @@ export default async function Page({ params }) {
               <Link href="/buyer/messages" className="pd-btn-primary">
                 <span className="material-icons" style={{ fontSize: 18 }}>chat</span> Message Seller
               </Link>
-              <button className="pd-btn-outline">
-                <span className="material-icons" style={{ fontSize: 18 }}>event</span> Schedule Viewing
-              </button>
-              <button className="pd-btn-outline pd-btn-accent">
-                <span className="material-icons" style={{ fontSize: 18 }}>handshake</span>
-                {p.listing_kind === "rent" ? " Reserve Unit" : " Make an Offer"}
-              </button>
+              <PropertyCTAButtons
+                listingKind={p.listing_kind}
+                propertyTitle={p.title}
+                priceLabel={priceLabel}
+              />
 
               <div className="pd-quick-stats">
                 <div className="pd-qs"><strong>{stats.rating}</strong> Seller Rating</div>

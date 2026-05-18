@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { dbAll } from "@/lib/sqlite";
+import ContactSupportButton from "./ContactSupportButton";
 
 const STEPS = [
   { key: "offer", label: "Offer Accepted", icon: "handshake" },
@@ -204,12 +205,14 @@ export default async function Page({ params }) {
                     ? "Cancellation notes and refund records (if any) are preserved for your reference."
                     : "Susync support is available 24/7 to guide you through the contract review and escrow steps."}
               </p>
-              <button className="tt-btn-outline" style={{ marginTop: 12 }}>
-                <span className="material-icons" style={{ fontSize: 18 }}>
-                  {isHistory ? "download" : "support_agent"}
-                </span>
-                {isHistory ? " Download Records" : " Contact Support"}
-              </button>
+              {isHistory ? (
+                <button className="tt-btn-outline" style={{ marginTop: 12 }}>
+                  <span className="material-icons" style={{ fontSize: 18 }}>download</span>
+                  {" "}Download Records
+                </button>
+              ) : (
+                <ContactSupportButton />
+              )}
             </div>
           </aside>
         </div>
